@@ -1,0 +1,7 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+section {
+  scroll-margin-top: 70px; /* Para que el navbar no tape el contenido al hacer scroll */
+}
