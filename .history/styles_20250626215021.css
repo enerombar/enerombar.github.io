@@ -1,0 +1,45 @@
+/* Tipografía */
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  color: #ddd;
+  background-color: #0a0a0a;
+}
+
+h1, h2, h5 {
+  color: #fff;
+}
+
+/* HERO */
+.hero {
+  height: 100vh;
+  background: url('img/hero.jpg') no-repeat center center/cover;
+  padding: 0 20px;
+}
+
+/* Botones */
+.btn-primary {
+  background-color: #00C897;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #00a87b;
+}
+
+/* Secciones */
+section {
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+
+/* Cards */
+.card {
+  background-color: #1c1c1c;
+  border: none;
+  color: #eee;
+}
+
+.card img {
+  height: 200px;
+  object-fit: cover;
+}
