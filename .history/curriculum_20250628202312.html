@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Currículum - Eneas Romero</title>
+  <link rel="icon" type="image/png" href="img/logo_blanco_redondo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link href="styles.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(120deg, #181c22 0%, #232930 100%);
+      font-family: 'Space Grotesk', Arial, sans-serif;
+      color: #e0f7fa;
+      min-height: 100vh;
+      /* Sutil overlay para efecto glass */
+      position: relative;
+      overflow-x: hidden;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse at 80% 10%, #00eaff22 0%, transparent 60%),
+                  radial-gradient(ellipse at 10% 90%, #00bcd422 0%, transparent 70%);
+      z-index: 0;
+    }
+    .elegant-card {
+      background: rgba(24,28,34,0.92);
+      border-radius: 28px;
+      border: 2px solid #00eaff44;
+      box-shadow: 0 8px 32px 8px #00eaff22, 0 2px 8px #00eaff33;
+      backdrop-filter: blur(12px) saturate(1.2);
+      padding: 2.5rem 2.2rem 2.2rem 2.2rem;
+      margin-bottom: 2.5rem;
+      transition: box-shadow 0.18s, border-color 0.18s;
+      position: relative;
+      overflow: hidden;
+    }
+    .elegant-card::before {
+      content: "";
+      position: absolute;
+      top: -60px; left: -60px; width: 180px; height: 180px;
+      background: radial-gradient(circle, #00eaff33 0%, transparent 80%);
+      z-index: 0;
+      pointer-events: none;
+      filter: blur(2px);
+    }
+    .elegant-card:hover {
+      box-shadow: 0 16px 48px 16px #00eaff33, 0 4px 16px #00eaff55;
+      border-color: #00eaffbb;
+    }
+    .cv-header {
+      display: flex;
+      align-items: center;
+      gap: 2.2rem;
+      margin-bottom: 2.5rem;
+      background: rgba(24,28,34,0.92);
+      border-radius: 22px;
+      box-shadow: 0 4px 24px #00eaff22;
+      padding: 2.2rem 2rem 2rem 2rem;
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+    }
+    .cv-header-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #00eaff55;
+      box-shadow: 0 0 32px #00eaff44;
+      background: #fff;
+    }
+    .cv-header-info {
+      flex: 1;
+    }
+    .cv-header-name {
+      font-family: 'Bebas Neue', 'Space Grotesk', Arial, sans-serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      color: #00eaff;
+      margin-bottom: 0.2rem;
+      text-shadow: 0 2px 16px #00eaff33;
+    }
+    .cv-header-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.7rem;
+      letter-spacing: 0.02em;
+      text-shadow: 0 1px 8px #00eaff33;
+    }
+    .cv-header-contact {
+      font-size: 1.08rem;
+      color: #b2ebf2;
+      margin-bottom: 0.1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      align-items: center;
+    }
+    .cv-header-contact a {
+      color: #00eaff;
+      text-decoration: none;
+      margin-right: 0.7rem;
+      font-size: 1.3rem;
+      transition: color 0.18s, transform 0.18s;
+    }
+    .cv-header-contact a:hover {
+      color: #fff;
+      transform: scale(1.12);
+    }
+    @media (max-width: 700px) {
+      .cv-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+        padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+      }
+      .cv-header-photo {
+        width: 90px;
+        height: 90px;
+      }
+      .cv-header-name {
+        font-size: 2rem;
+      }
+    }
+    /* Línea temporal animada */
+    .cv-timeline {
+      position: relative;
+      margin-left: 0;
+      padding-left: 1.5rem;
+      border-left: 3px solid #00eaff55;
+      z-index: 1;
+      min-height: 120px;
+    }
+    .cv-timeline .timeline-progress {
+      display: none;
+    }
+    .cv-item {
+      position: relative;
+      margin-bottom: 2.2rem;
+      padding-left: 1.2rem;
+      z-index: 1;
+      transition: background 0.18s;
+      background: rgba(0,234,255,0.03);
+      border-radius: 12px;
+      box-shadow: 0 2px 12px #00eaff11;
+      border-left: 3px solid #00eaff44;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      animation: fadeInUp 0.7s both;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: none;}
+    }
+    .cv-item:last-child {
+      margin-bottom: 0;
+    }
+    .cv-item::before {
+      content: '';
+      position: absolute;
+      left: -1.6rem;
+      top: 1.1rem;
+      width: 1.1rem;
+      height: 1.1rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00eaff 60%, #00bcd4 100%);
+      border: 2.5px solid #232930;
+      box-shadow: 0 0 0 6px #00eaff33;
+      z-index: 2;
+      transition: box-shadow 0.18s;
+    }
+    .cv-date {
+      font-size: 1.13rem;
+      font-weight: 700;
+      color: #00eaff;
+      margin-bottom: 0.2rem;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      text-shadow: 0 1px 8px #00eaff33;
+    }
+    .cv-date::before {
+      content: "⏳";
+      font-size: 1.1em;
+      margin-right: 0.3em;
+      opacity: 0.7;
+      filter: drop-shadow(0 0 2px #00eaff88);
+    }
+    .cv-title {
+      font-size: 1.22rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.1rem;
+      letter-spacing: 0.01em;
+      text-shadow: 0 1px 8px #00eaff33;
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+    }
+    .cv-title::before {
+      content: "🎓";
+      font-size: 1.1em;
+      margin-right: 0.2em;
+      opacity: 0.8;
+      filter: drop-shadow(0 0 2px #00eaff88);
+    }
+    .cv-place {
+      font-size: 1.08rem;
+      color: #b2ebf2;
+      margin-bottom: 0.1rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      text-shadow: 0 1px 6px #00eaff22;
+    }
+    .cv-desc {
+      font-size: 1.04rem;
+      color: #b2ebf2cc;
+      margin-bottom: 0.1rem;
+      font-style: italic;
+      text-shadow: 0 1px 6px #00eaff22;
+    }
+    /* Habilidades técnicas */
+    .skills-section {
+      margin-top: 2.5rem;
+      margin-bottom: 2.5rem;
+      background: rgba(24,28,34,0.92);
+      border-radius: 22px;
+      box-shadow: 0 4px 24px #00eaff22;
+      padding: 2rem 1.5rem;
+    }
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem 2.5rem;
+      justify-content: center;
+      align-items: flex-start;
+      margin-bottom: 0;
+      padding-left: 0;
+      list-style: none;
+    }
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 1.13rem;
+      color: #b2ebf2;
+      font-weight: 600;
+      background: rgba(0,234,255,0.06);
+      border-radius: 12px;
+      padding: 0.7rem 1.2rem;
+      box-shadow: 0 2px 8px #00eaff11;
+      transition: background 0.18s, color 0.18s;
+    }
+    .skill-item i {
+      font-size: 1.7rem;
+      color: #00eaff;
+      filter: drop-shadow(0 0 6px #00eaff44);
+    }
+    .skill-item:hover {
+      background: #00eaff22;
+      color: #fff;
+    }
+    /* Idiomas */
+    .languages-section {
+      margin-top: 2.5rem;
+      margin-bottom: 2.5rem;
+      background: rgba(24,28,34,0.92);
+      border-radius: 22px;
+      box-shadow: 0 4px 24px #00eaff22;
+      padding: 2rem 1.5rem;
+    }
+    .languages-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem 2.5rem;
+      justify-content: center;
+      align-items: flex-start;
+      margin-bottom: 0;
+      padding-left: 0;
+      list-style: none;
+    }
+    .language-item {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 1.13rem;
+      color: #b2ebf2;
+      font-weight: 600;
+      background: rgba(0,234,255,0.06);
+      border-radius: 12px;
+      padding: 0.7rem 1.2rem;
+      box-shadow: 0 2px 8px #00eaff11;
+      transition: background 0.18s, color 0.18s;
+    }
+    .language-item img {
+      width: 2rem;
+      height: 1.3rem;
+      border-radius: 4px;
+      box-shadow: 0 0 0 2px #00eaff33;
+      object-fit: cover;
+    }
+    .language-item:hover {
+      background: #00eaff22;
+      color: #fff;
+    }
+    /* Certificaciones */
+    .cert-section {
+      margin-top: 2.5rem;
+      margin-bottom: 2.5rem;
+      background: rgba(24,28,34,0.92);
+      border-radius: 22px;
+      box-shadow: 0 4px 24px #00eaff22;
+      padding: 2rem 1.5rem;
+    }
+    .cert-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-bottom: 0;
+      padding-left: 0;
+      list-style: none;
+    }
+    .cert-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1.08rem;
+      color: #b2ebf2;
+      font-weight: 600;
+      background: rgba(0,234,255,0.06);
+      border-radius: 10px;
+      padding: 0.7rem 1.2rem;
+      box-shadow: 0 2px 8px #00eaff11;
+      transition: background 0.18s, color 0.18s;
+    }
+    .cert-item i {
+      font-size: 1.4rem;
+      color: #00eaff;
+    }
+    .cert-item:hover {
+      background: #00eaff22;
+      color: #fff;
+    }
+    /* Responsive improvements */
+    @media (max-width: 900px) {
+      .elegant-card, .skills-section, .languages-section, .cert-section { padding: 1.4rem 0.7rem 1.2rem 0.7rem; }
+      .cv-timeline { margin-left: 0.5rem; padding-left: 1.1rem; }
+      .section-title { font-size: 1.5rem; }
+    }
+    @media (max-width: 600px) {
+      .elegant-card, .skills-section, .languages-section, .cert-section { padding: 0.7rem 0.2rem 0.7rem 0.2rem; }
+      .cv-timeline { margin-left: 0.2rem; padding-left: 0.7rem; }
+      .section-title { font-size: 1.1rem; }
+      .skills-list, .languages-list { gap: 0.7rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="background-canvas"></canvas>
+  <div class="d-flex flex-column min-vh-100">
+    <div id="navbar-container">Cargando navbar...</div>
+    <main style="padding-top:90px; flex: 1 0 auto;">
+      <section class="container py-5">
+        <!-- EXTRACTO ACTUALIZADO DEL APARTADO CURRÍCULUM PARA PORTFOLIO -->
+
+<!-- Cabecera -->
+<div class="cv-header mb-5" data-aos="fade-down" data-aos-duration="1200">
+  <img src="img/logo.png" alt="Eneas Romero" class="cv-header-photo" />
+  <div class="cv-header-info">
+    <div class="cv-header-name">Eneas Romero</div>
+    <div class="cv-header-title">Estudiante de Ingeniería Informática y Matemáticas | IA · Ciencia de Datos · Desarrollo Web</div>
+    <div class="cv-header-contact">
+      <span><i class="fas fa-envelope"></i> personaleneasromero@gmail.com</span>
+      <a href="https://www.linkedin.com/in/eneas-romero" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/enerombar" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+    </div>
+  </div>
+</div>
+
+<!-- Línea temporal de formación y proyectos -->
+<div class="card shadow elegant-card mb-4" data-aos="fade-up" data-aos-duration="1200">
+  <div class="card-body">
+    <h2 class="mb-4 section-title text-center">Formación y Experiencia</h2>
+    <div class="cv-timeline">
+
+      <!-- Grado -->
+      <div class="cv-item d-flex align-items-start gap-3" data-aos="fade-right" data-aos-delay="100">
+        <div style="flex-shrink:0;">
+          <span style="font-size:2.1rem; color:#00eaff;"><i class="fas fa-university"></i></span>
+        </div>
+        <div>
+          <div class="cv-date">2022 - Actualidad <span class="badge bg-info text-dark ms-2">En curso</span></div>
+          <div class="cv-title">Doble Grado en Ingeniería Informática y Matemáticas</div>
+          <div class="cv-place">Universidad de Sevilla</div>
+          <div class="cv-desc">
+            Más del 60% completado (curso 3º finalizado), nota media: 8,22.<br>
+            Mención en Computación: Ciencia de datos, algoritmia e inteligencia artificial.
+          </div>
+        </div>
+      </div>
+
+      <!-- Mathflix -->
+      <div class="cv-item d-flex align-items-start gap-3" data-aos="fade-right" data-aos-delay="200">
+        <div style="flex-shrink:0;">
+          <span style="font-size:2.1rem; color:#4caf50;"><i class="fas fa-lightbulb"></i></span>
+        </div>
+        <div>
+          <div class="cv-date">2023 - 2024</div>
+          <div class="cv-title">Mathflix · Proyecto de Divulgación Matemática</div>
+          <div class="cv-place">Universidad de Sevilla</div>
+          <div class="cv-desc">Desarrollo de contenido educativo con enfoque divulgativo. Trabajo en equipo y creatividad matemática.</div>
+        </div>
+      </div>
+
+      <!-- TFM colaboración -->
+      <div class="cv-item d-flex align-items-start gap-3" data-aos="fade-right" data-aos-delay="300">
+        <div style="flex-shrink:0;">
+          <span style="font-size:2.1rem; color:#9c27b0;"><i class="fas fa-project-diagram"></i></span>
+        </div>
+        <div>
+          <div class="cv-date">2024 - 2025</div>
+          <div class="cv-title">Colaboración en TFM (Procesamiento de Lenguaje Natural)</div>
+          <div class="cv-place">Universidad de Sevilla</div>
+          <div class="cv-desc">Análisis de resultados y uso de librerías de NLP en Python. Desarrollo de competencias en procesamiento textual y evaluación experimental.</div>
+        </div>
+      </div>
+
+      <!-- Bachillerato -->
+      <div class="cv-item d-flex align-items-start gap-3" data-aos="fade-right" data-aos-delay="400">
+        <div style="flex-shrink:0;">
+          <span style="font-size:2.1rem; color:#00bcd4;"><i class="fas fa-graduation-cap"></i></span>
+        </div>
+        <div>
+          <div class="cv-date">2020 - 2022 <span class="badge bg-success text-white ms-2">Matrícula de Honor</span></div>
+          <div class="cv-title">Bachillerato Científico-Tecnológico</div>
+          <div class="cv-place">IES San Blas, Aracena</div>
+          <div class="cv-desc">Participación en olimpiadas y proyectos de divulgación matemática.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Habilidades Técnicas -->
+<div class="skills-section mb-4" data-aos="fade-up" data-aos-delay="100">
+  <h2 class="mb-4 section-title text-center">Habilidades Técnicas</h2>
+  <ul class="skills-list">
+    <li class="skill-item"><i class="fas fa-code"></i> Python (Pandas, NumPy, Matplotlib)</li>
+    <li class="skill-item"><i class="fas fa-brain"></i> PyTorch · TensorFlow</li>
+    <li class="skill-item"><i class="fas fa-database"></i> SQL · Power BI · Metabase</li>
+    <li class="skill-item"><i class="fab fa-js-square"></i> HTML · CSS · JavaScript · Bootstrap</li>
+    <li class="skill-item"><i class="fas fa-project-diagram"></i> Git · GitHub</li>
+    <li class="skill-item"><i class="fas fa-cogs"></i> Automatización (Make · Zapier)</li>
+  </ul>
+</div>
+
+<!-- Idiomas -->
+<div class="languages-section mb-4" data-aos="fade-up" data-aos-delay="200">
+  <h2 class="mb-4 section-title text-center">Idiomas</h2>
+  <ul class="languages-list">
+    <li class="language-item"><img src="https://flagcdn.com/es.svg" alt="Español" /> Español (Nativo)</li>
+    <li class="language-item"><img src="https://flagcdn.com/gb.svg" alt="Inglés" /> Inglés (B2)</li>
+    <li class="language-item"><img src="https://flagcdn.com/fr.svg" alt="Francés" /> Francés (B1)</li>
+  </ul>
+</div>
+
+<!-- Certificaciones -->
+<div class="cert-section mb-4" data-aos="fade-up" data-aos-delay="300">
+  <h2 class="mb-4 section-title text-center">Certificaciones</h2>
+  <ul class="cert-list">
+    <li class="cert-item"><i class="fas fa-certificate"></i> Fundamentos de Power BI – Santander Open Academy</li>
+    <li class="cert-item"><i class="fas fa-certificate"></i> Fundamentals of Accelerated Data Science – Nvidia</li>
+    <li class="cert-item"><i class="fas fa-certificate"></i> Deep Learning with PyTorch – IBM</li>
+  </ul>
+</div>
+
+<!-- Botón para descargar PDF según rol -->
+<div class="text-center mb-4">
+  <label for="cv-role-select" class="form-label fw-bold mb-2" style="color:#00eaff;">Descargar CV según rol:</label>
+  <select id="cv-role-select" class="form-select d-inline-block w-auto mx-2" style="max-width:220px;display:inline-block;">
+    <option value="general" selected>General</option>
+    <option value="datascience">Data Scientist</option>
+    <option value="dataanalyst">Data Analyst</option>
+    <option value="dataengineer">Data Engineer</option>
+    <option value="mathresearcher">Math Researcher</option>
+    <option value="matematico">AI Engineer</option>
+    <option value="matematico">Machine Learning Engineer</option>
+  </select>
+  <a id="cv-download-btn" class="btn btn-outline-info mt-3 ms-2" href="/docs/CurrículumEneas.pdf" download>
+    <i class="fas fa-file-download me-1"></i> Descargar CV en PDF
+  </a>
+</div>
+
+      </section>
+    </main>
+    <footer class="footer-glass text-center py-4 mt-5" style="flex-shrink:0;">
+      <div class="container">
+        <span class="text-muted">&copy; 2025 Eneas Romero. Todos los derechos reservados.</span>
+      </div>
+    </footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    // Carga el navbar desde navbar.html y luego inicializa scripts dependientes
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('navbar.html')
+        .then(res => {
+          if (!res.ok) throw new Error('No se pudo cargar navbar.html: ' + res.status);
+          return res.text();
+        })
+        .then(html => {
+          document.getElementById('navbar-container').innerHTML = html;
+        })
+        .catch(err => {
+          document.getElementById('navbar-container').innerHTML = '<div style="color:red">Error cargando navbar: ' + err.message + '</div>';
+          console.error(err);
+        });
+      // Inicializa AOS
+      if (window.AOS) AOS.init({ once: true, mirror: false });
+      else {
+        var aosScript = document.createElement('script');
+        aosScript.src = "https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js";
+        aosScript.onload = function() {
+          if (window.AOS) AOS.init({ once: true, mirror: false });
+        };
+        document.body.appendChild(aosScript);
+      }
+    });
+  </script>
+  <script>
+    // Fondo animado sencillo con partículas
+    const canvas = document.getElementById('background-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const numParticles = 60;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function createParticles() {
+      particles = [];
+      for (let i = 0; i < numParticles; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: 1 + Math.random() * 2,
+          dx: -0.5 + Math.random(),
+          dy: -0.5 + Math.random(),
+          alpha: 0.2 + Math.random() * 0.5
+        });
+      }
+    }
+    createParticles();
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of particles) {
+        ctx.save();
+        ctx.globalAlpha = p.alpha;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI);
+        ctx.fillStyle = '#00eaff';
+        ctx.shadowColor = '#00eaff';
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.restore();
+
+        // Movimiento
+        p.x += p.dx;
+        p.y += p.dy;
+
+        // Rebote en bordes
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      }
+      requestAnimationFrame(drawParticles);
+    }
+    drawParticles();
+  </script>
+  <script src="scripts.js"></script>
+  <script>
+    // Selector de CV por rol
+    document.addEventListener('DOMContentLoaded', function() {
+      var select = document.getElementById('cv-role-select');
+      var btn = document.getElementById('cv-download-btn');
+      if (select && btn) {
+        var cvMap = {
+          general: '/docs/CurrículumEneas.pdf',
+          datascience: '/docs/CurrículumEneas_DataScience.pdf',
+          developer: '/docs/CurrículumEneas_Desarrollador.pdf',
+          matematico: '/docs/CurrículumEneas_Matematico.pdf'
+        };
+        select.addEventListener('change', function() {
+          var val = select.value;
+          btn.href = cvMap[val] || cvMap.general;
+        });
+      }
+    });
+  </script>
+</body>
+</html>

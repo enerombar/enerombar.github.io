@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eneas Romero - Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- AOS Animations -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+
+  <!-- FontAwesome Icons -->
+  <script src="https://kit.fontawesome.com/2dd1da6546.js" crossorigin="anonymous"></script>
+
+  <!-- Custom CSS -->
+  <link href="styles.css" rel="stylesheet" />
+  <!-- Elimina Particles.js -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> -->
+</head>
+<body>
+  <!-- Pantalla de carga -->
+  <div id="loading-screen">
+    <div class="spinner"></div>
+  </div>
+  <!-- Overlay de fondo igual que en proyectos.html -->
+  <div id="bg-overlay" style="position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 80% 10%, #00eaff22 0%, transparent 60%), radial-gradient(ellipse at 10% 90%, #00bcd422 0%, transparent 70%);"></div>
+  <!-- NAVBAR -->
+  <div id="navbar-container">Cargando navbar...</div>
+
+  <!-- HERO -->
+  <header id="hero" class="hero text-white d-flex align-items-center justify-content-center text-center" data-aos="fade-down"
+    data-aos-duration="1500" data-aos-easing="ease-in-out" style="position:relative;z-index:1;">
+    <!-- ELIMINADO: Botón pantalla completa -->
+    <div class="w-100 d-flex flex-column align-items-center">
+      <!-- Logo centrado arriba -->
+      <div class="hero-logo-wrapper">
+        <img id="hero-logo" src="img/logo.png" alt="Logo Eneas Romero" style="height:130px;width:130px;max-width:130px;">
+      </div>
+      <!-- Título y subtítulo en recuadro -->
+      <div class="hero-content-glass">
+        <div class="hero-text-wrapper text-center">
+          <h1 class="display-2 fw-bold hero-title" data-key="heroName">
+            Eneas Romero
+          </h1>
+          <p class="lead hero-subtitle mb-2 text-gradient" data-key="heroSubtitle">
+            Matemáticas & Computación
+          </p>
+          <!-- Iconos sociales justo debajo del subtítulo y dentro del mismo contenedor -->
+          <div class="hero-social-icons">
+            <a href="https://www.linkedin.com/in/eneas-romero" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link">
+              <i class="fab fa-linkedin fa-2x"></i>
+            </a>
+            <a href="https://github.com/enerombar" target="_blank" rel="noopener" aria-label="GitHub" class="social-link">
+              <i class="fab fa-github fa-2x"></i>
+            </a>
+            <a href="mailto:personaleneasromero@email.com" aria-label="Correo" class="social-link">
+              <i class="fas fa-envelope fa-2x"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Indicador scroll animado fuera del recuadro -->
+      <div class="scroll-indicator mt-4" aria-label="Desplazar hacia abajo">
+        <button id="scroll-down-btn" class="scroll-mouse-btn" aria-label="Bajar a la siguiente sección">
+          <span class="scroll-mouse">
+            <span class="scroll-wheel"></span>
+          </span>
+          <span class="scroll-arrow"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- SOBRE MÍ (resumido) -->
+  <section id="about" class="py-5" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="200" style="position:relative;z-index:1;">
+    <div class="container">
+      <h2 class="mb-4 section-title" data-key="aboutTitle">Sobre mí</h2>
+      <p class="section-text" data-key="aboutText">
+        Soy Eneas Romero, estudiante de Ingeniería Informática y Matemáticas. Apasionado por el desarrollo de software, la inteligencia artificial y la divulgación técnica.
+      </p>
+      <a href="articulos.html" class="btn btn-outline-primary mt-3" data-key="btnViewArticles">Ver artículos</a>
+    </div>
+  </section>
+
+  <!-- LÍNEA CRONOLÓGICA ACADÉMICA (resumida) -->
+  <section id="timeline" class="py-5" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200" style="position:relative;z-index:1;">
+    <div class="container">
+      <h2 class="mb-4 section-title">Línea cronológica</h2>
+      <ul class="timeline">
+        <li>
+          <div class="timeline-date">2024</div>
+          <div class="timeline-content">
+            <h5>Grado en Ingeniería Informática y Matemáticas</h5>
+            <p>Doble titulación en progreso.</p>
+          </div>
+        </li>
+        <li>
+          <div class="timeline-date">2022</div>
+          <div class="timeline-content">
+            <h5>Bachillerato Científico-Tecnológico</h5>
+            <p>Matrícula de Honor.</p>
+          </div>
+        </li>
+      </ul>
+      <a href="proyectos.html#timeline" class="btn btn-outline-primary mt-3">Ver más logros</a>
+    </div>
+  </section>
+
+  <!-- PROYECTOS (solo muestra 2, resumen) -->
+  <section id="projects" class="py-5 bg-dark text-white" style="position:relative;z-index:1;"
+    data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="300">
+    <div class="container">
+      <h2 class="mb-4 section-title" data-key="projectsTitle">Proyectos</h2>
+      <div class="row g-4">
+        <div class="col-md-6" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="400">
+          <div class="card h-100 shadow project-card elegant-card">
+            <div class="project-img-wrapper">
+              <img src="img/proyecto1.jpg" onerror="this.onerror=null;this.src='img/banner_default.png';"
+                class="card-img-top" alt="Proyecto 1" />
+              <div class="project-img-overlay"></div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title" data-key="project1Title">Proyecto 1</h5>
+              <p class="card-text" data-key="project1Desc">Descripción breve del proyecto. Tecnologías usadas, objetivos y resultados.</p>
+              <a href="proyectos.html" class="btn btn-outline-primary project-btn" data-key="btnViewMore">Ver más</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="600">
+          <div class="card h-100 shadow project-card elegant-card">
+            <div class="project-img-wrapper">
+              <img src="img/proyecto2.jpg" onerror="this.onerror=null;this.src='img/banner_default.png';"
+                class="card-img-top" alt="Proyecto 2" />
+              <div class="project-img-overlay"></div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title" data-key="project2Title">Proyecto 2</h5>
+              <p class="card-text" data-key="project2Desc">Este proyecto aún no tiene imagen, pero se ve bien con el banner por defecto.</p>
+              <a href="proyectos.html" class="btn btn-outline-primary project-btn" data-key="btnViewMore">Ver más</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <a href="proyectos.html" class="btn btn-primary" data-key="btnViewProjects">Ver todos los proyectos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer-glass text-center py-4 mt-5">
+    <div class="container">
+      <span class="text-muted">&copy; 2025 Eneas Romero. Todos los derechos reservados.</span>
+    </div>
+  </footer>
+
+  <!-- Scripts Bootstrap y AOS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Carga el navbar desde navbar.html y luego inicializa scripts dependientes
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('navbar.html')
+        .then(res => {
+          if (!res.ok) throw new Error('No se pudo cargar navbar.html: ' + res.status);
+          return res.text();
+        })
+        .then(html => {
+          document.getElementById('navbar-container').innerHTML = html;
+          // Inicializa scripts dependientes del navbar aquí
+          // Carga AOS y scripts.js solo después de insertar el navbar
+          var aosScript = document.createElement('script');
+          aosScript.src = "https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js";
+          aosScript.onload = function() {
+            if (window.AOS) AOS.init({ once: true, mirror: false });
+          };
+          document.body.appendChild(aosScript);
+
+          var mainScript = document.createElement('script');
+          mainScript.src = "scripts.js";
+          mainScript.onload = function() {
+            if (window.initAfterNavbar) window.initAfterNavbar();
+          };
+          document.body.appendChild(mainScript);
+        })
+        .catch(err => {
+          document.getElementById('navbar-container').innerHTML = '<div style="color:red">Error cargando navbar: ' + err.message + '</div>';
+          console.error(err);
+        });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm" style="backdrop-filter: blur(8px); background:rgba(18,18,18,0.85)!important;">
+  <div class="container">
+    <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="index.html">
+      <img src="img/logo.png" alt="Logo" style="height:38px;width:38px;border-radius:50%;background:#fff;padding:3px;box-shadow:0 0 8px #00eaff44;">
+      Eneas Romero
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav align-items-center">
+        <li class="nav-item"><a class="nav-link" href="index.html#hero" data-key="navAbout">Sobre mí</a></li>
+        <li class="nav-item"><a class="nav-link" href="proyectos.html" data-key="navProjectsPage">Proyectos</a></li>
+        <li class="nav-item"><a class="nav-link" href="articulos.html" data-key="navArticles">Artículos</a></li>
+        <li class="nav-item"><a class="nav-link" href="curriculum.html">Currículum</a></li>
+        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+        <li class="nav-item ms-3">
+          <div class="dropdown">
+            <button id="langToggle" class="btn btn-flag" aria-label="Cambiar idioma" type="button">
+              <img id="langFlag" src="img/gb.svg" alt="Cambiar idioma" style="height:24px;width:32px;object-fit:cover;">
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end lang-animate" id="langMenu">
+              <li>
+                <a class="dropdown-item lang-option" href="#" data-lang="es">
+                  <img src="img/es.svg" alt="Español" style="height:20px;width:28px;object-fit:cover;border-radius:4px;margin-right:8px;"> Español
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item lang-option" href="#" data-lang="en">
+                  <img src="img/gb.svg" alt="English" style="height:20px;width:28px;object-fit:cover;border-radius:4px;margin-right:8px;"> English
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item lang-option" href="#" data-lang="fr">
+                  <img src="img/fr.png" alt="Français" style="height:20px;width:28px;object-fit:cover;border-radius:4px;margin-right:8px;"> Français
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<style>
+/* Animación para el menú de idiomas */
+.lang-animate {
+  opacity: 0;
+  transform: translateY(-12px) scale(0.98);
+  transition: opacity 0.22s cubic-bezier(.4,1.4,.3,1), transform 0.22s cubic-bezier(.4,1.4,.3,1);
+  pointer-events: none;
+  position: absolute;
+  z-index: 1100;
+}
+.lang-animate.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+</style>
+<script>
+// Animación personalizada para el menú de idiomas
+window.initLangMenuAnimation = function() {
+  const langToggle = document.getElementById('langToggle');
+  const langMenu = document.getElementById('langMenu');
+  let menuOpen = false;
+
+  // Evita múltiples inicializaciones
+  if (langToggle && langMenu && !langMenu.dataset.animated) {
+    langMenu.dataset.animated = "true";
+
+    function hideMenuWithAnimation() {
+      langMenu.classList.remove('show');
+      menuOpen = false;
+    }
+
+    function showMenuWithAnimation() {
+      langMenu.classList.add('show');
+      menuOpen = true;
+    }
+
+    // Usa eventos en el propio menú, no en document, para evitar conflictos con otros listeners
+    langToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (!langMenu.classList.contains('show')) {
+        showMenuWithAnimation();
+      } else {
+        hideMenuWithAnimation();
+      }
+    });
+
+    // Permite seleccionar idioma sin cerrar el menú antes de tiempo
+    langMenu.querySelectorAll('.lang-option').forEach(option => {
+      option.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        hideMenuWithAnimation();
+      });
+    });
+
+    // Cerrar menú al hacer click fuera
+    document.addEventListener('click', function(e) {
+      if (menuOpen && !langMenu.contains(e.target) && !langToggle.contains(e.target)) {
+        hideMenuWithAnimation();
+      }
+    }, true);
+
+    // Cerrar con ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === "Escape" && menuOpen) {
+        hideMenuWithAnimation();
+      }
+    });
+    }
+  };
+  // Inicializa al cargar el navbar directamente (para uso standalone)
+  window.initLangMenuAnimation();
+
+  // --- Resalta el enlace activo según la página actual ---
+  (function() {
+    // Obtiene la ruta base y el hash actual
+    const path = window.location.pathname.split('/').pop().toLowerCase();
+    const hash = window.location.hash;
+
+    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+    // Obtiene href y hash del enlace
+    const href = link.getAttribute('href') ? link.getAttribute('href').split('#')[0].toLowerCase() : "";
+    const linkHash = link.getAttribute('href') && link.getAttribute('href').includes('#')
+      ? '#' + link.getAttribute('href').split('#')[1]
+      : "";
+
+    // Resalta si coincide la ruta y el hash (o si no hay hash)
+    if (
+      // Página principal sin hash
+      (path === "" && (href === "index.html" || href === "./index.html") && (hash === "" || hash === "#hero") && linkHash === hash) ||
+      // Coincide archivo y hash
+      (path === href && linkHash === hash) ||
+      // Coincide solo archivo y no hay hash en ambos
+      (path === href && !linkHash && !hash)
+    ) {
+      link.classList.add('active');
+    }
+    });
+  })();

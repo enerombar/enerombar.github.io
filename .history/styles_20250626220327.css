@@ -1,0 +1,83 @@
+/* Fuentes y base */
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background-color: #121212;
+  color: #eee;
+  margin: 0;
+}
+
+/* Hero con fondo oscuro y centrado */
+.hero {
+  background: linear-gradient(135deg, #0a74da, #0053a3);
+  height: 100vh;
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+/* Botón principal */
+.btn-primary {
+  background-color: #0a74da;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+.btn-primary:hover {
+  background-color: #0053a3;
+}
+
+/* Cards */
+.card {
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #222;
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 20px rgba(10, 116, 218, 0.7);
+}
+
+/* Imágenes con hover */
+.card-img-top {
+  border-radius: 15px 15px 0 0;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  object-fit: cover;
+  height: 200px;
+  width: 100%;
+}
+
+.card-img-top:hover {
+  transform: scale(1.05);
+  filter: brightness(1.15);
+  cursor: pointer;
+}
+
+/* Sección proyectos */
+#projects {
+  background-color: #1a1a1a;
+}
+
+/* Formularios */
+input.form-control,
+textarea.form-control {
+  background-color: #222;
+  border: 1px solid #444;
+  color: #eee;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+}
+
+input.form-control:focus,
+textarea.form-control:focus {
+  border-color: #0a74da;
+  outline: none;
+  box-shadow: 0 0 8px #0a74da;
+}
+
+/* Sección contacto */
+#contact {
+  background-color: #1a1a1a;
+}

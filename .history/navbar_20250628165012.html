@@ -1,0 +1,255 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm" style="backdrop-filter: blur(8px); background:rgba(18,18,18,0.85)!important;">
+  <div class="container">
+    <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="index.html">
+      <img src="img/logo.png" alt="Logo" style="height:38px;width:38px;border-radius:50%;background:#fff;padding:3px;box-shadow:0 0 8px #00eaff44;">
+      Eneas Romero
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav align-items-center">
+        <li class="nav-item"><a class="nav-link" href="index.html#hero" data-key="navAbout">Sobre mí</a></li>
+        <li class="nav-item"><a class="nav-link" href="proyectos.html" data-key="navProjectsPage">Proyectos</a></li>
+        <li class="nav-item"><a class="nav-link" href="articulos.html" data-key="navArticles">Artículos</a></li>
+        <li class="nav-item"><a class="nav-link" href="curriculum.html">Currículum</a></li>
+        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<script>
+  // --- Resalta el enlace activo según la página actual ---
+  (function() {
+    // Obtiene la ruta base y el hash actual
+    const path = window.location.pathname.split('/').pop().toLowerCase();
+    const hash = window.location.hash;
+
+    // Normaliza rutas para comparación
+    function normalize(href) {
+      if (!href) return "";
+      // Quita el dominio, solo deja el archivo y hash
+      let url = href.split('/').pop().toLowerCase();
+      // Quita parámetros y hash
+      url = url.split('?')[0].split('#')[0];
+      return url;
+    }
+
+    // Marca como activo el enlace que corresponde a la página actual
+    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href) return;
+      const linkPath = normalize(href);
+      // Si es index.html o raíz
+      if (
+        (path === "" || path === "index.html" || path === "./index.html") &&
+        (linkPath === "index.html" || linkPath === "./index.html")
+      ) {
+        link.classList.add('active');
+      }
+      // Si coincide el archivo (proyectos.html, articulos.html, curriculum.html, contacto.html, etc)
+      else if (path === linkPath && linkPath !== "") {
+        link.classList.add('active');
+      }
+      // Si coincide el hash (para secciones internas)
+      else if (hash && href.endsWith(hash)) {
+        link.classList.add('active');
+      }
+      else {
+        link.classList.remove('active');
+      }
+    });
+  })();
+</script>
+  left: auto;
+  right: 0;
+  top: 110%;
+}
+</style>
+<script>
+// Animación personalizada para el menú de idiomas
+(function() {
+  // Espera a que el DOM esté listo antes de inicializar
+  function ready(fn) {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", fn);
+    } else {
+      fn();
+    }
+  }
+
+  ready(function() {
+    // Mensaje de debug para saber que el script realmente se ejecuta
+    console.log('[DEBUG] Script navbar.html ejecutado, DOMContentLoaded:', document.readyState);
+
+    window.initLangMenuAnimation = function() {
+      const langToggle = document.getElementById('langToggle');
+      const langMenu = document.getElementById('langMenu');
+      let menuOpen = false;
+      let blurTimeout = null;
+
+      console.log('[DEBUG] initLangMenuAnimation called');
+      if (!langToggle) {
+        console.error('[DEBUG] langToggle NO ENCONTRADO');
+      }
+      if (!langMenu) {
+        console.error('[DEBUG] langMenu NO ENCONTRADO');
+      }
+      if (langToggle && langMenu) {
+        console.log('[DEBUG] langToggle y langMenu encontrados correctamente');
+      }
+
+      // Evita múltiples inicializaciones
+      if (langToggle && langMenu && !langMenu.dataset.animated) {
+        langMenu.dataset.animated = "true";
+        // TEST: Marca visualmente el botón para ver si existe y está en el DOM
+        langToggle.style.outline = "2px solid red";
+        console.log('[DEBUG] langToggle existe:', !!langToggle, langToggle);
+        console.log('[DEBUG] langMenu existe:', !!langMenu, langMenu);
+
+        function hideMenuWithAnimation() {
+          console.log('[DEBUG] hideMenuWithAnimation');
+          langMenu.classList.remove('show');
+          menuOpen = false;
+          langToggle.setAttribute('aria-expanded', 'false');
+        }
+
+        function showMenuWithAnimation() {
+          console.log('[DEBUG] showMenuWithAnimation');
+          langMenu.classList.add('show');
+          menuOpen = true;
+          langToggle.setAttribute('aria-expanded', 'true');
+          // Enfoca el primer elemento del menú para accesibilidad
+          const firstOption = langMenu.querySelector('.lang-option');
+          if (firstOption) firstOption.focus();
+        }
+
+        // Limpia listeners previos si los hubiera (por recarga dinámica)
+        langToggle.replaceWith(langToggle.cloneNode(true));
+        const newLangToggle = document.getElementById('langToggle');
+
+        newLangToggle.addEventListener('click', function(e) {
+          console.log('[DEBUG] langToggle CLICK recibido (button)');
+          e.preventDefault();
+          e.stopPropagation();
+          if (!langMenu.classList.contains('show')) {
+            showMenuWithAnimation();
+          } else {
+            hideMenuWithAnimation();
+          }
+        });
+        console.log('[DEBUG] Listener de click añadido a langToggle');
+
+        // También escucha clicks en la imagen dentro del botón
+        const langFlagImg = newLangToggle.querySelector('img');
+        if (langFlagImg) {
+          langFlagImg.addEventListener('click', function(e) {
+            console.log('[DEBUG] langFlag IMG click recibido');
+            newLangToggle.click();
+          });
+          console.log('[DEBUG] Listener de click añadido a langFlagImg');
+        }
+
+        // Permite seleccionar idioma sin cerrar el menú antes de tiempo
+        langMenu.querySelectorAll('.lang-option').forEach(option => {
+          option.setAttribute('tabindex', '0');
+          option.addEventListener('click', function(e) {
+            console.log('[DEBUG] lang-option click:', this.getAttribute('data-lang'));
+            e.preventDefault();
+            e.stopPropagation();
+            hideMenuWithAnimation();
+          });
+          option.addEventListener('keydown', function(e) {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              e.stopPropagation();
+              option.click();
+            }
+          });
+        });
+
+        // Cerrar menú al hacer click fuera
+        document.addEventListener('click', function(e) {
+          if (menuOpen && !langMenu.contains(e.target) && !langToggle.contains(e.target)) {
+            console.log('[DEBUG] document click fuera del menú');
+            hideMenuWithAnimation();
+          }
+        }, true);
+
+        // Cerrar con ESC
+        document.addEventListener('keydown', function(e) {
+          if (e.key === "Escape" && menuOpen) {
+            console.log('[DEBUG] ESC pressed, closing menu');
+            hideMenuWithAnimation();
+            langToggle.focus();
+          }
+        });
+
+        // Cerrar si pierde el foco (accesibilidad)
+        langMenu.addEventListener('focusout', function(e) {
+          blurTimeout = setTimeout(() => {
+            if (
+              menuOpen &&
+              !langMenu.contains(document.activeElement) &&
+              document.activeElement !== langToggle
+            ) {
+              console.log('[DEBUG] langMenu focusout, closing menu');
+              hideMenuWithAnimation();
+            }
+          }, 10);
+        });
+        langMenu.addEventListener('focusin', function() {
+          if (blurTimeout) clearTimeout(blurTimeout);
+        });
+      } else {
+        console.log('[DEBUG] langToggle or langMenu not found or already initialized');
+      }
+    };
+
+    // Llama SIEMPRE a la función después de definirla
+    window.initLangMenuAnimation();
+  });
+})();
+
+  // --- Resalta el enlace activo según la página actual ---
+  (function() {
+    // Obtiene la ruta base y el hash actual
+    const path = window.location.pathname.split('/').pop().toLowerCase();
+    const hash = window.location.hash;
+
+    // Normaliza rutas para comparación
+    function normalize(href) {
+      if (!href) return "";
+      // Quita el dominio, solo deja el archivo y hash
+      let url = href.split('/').pop().toLowerCase();
+      // Quita parámetros y hash
+      url = url.split('?')[0].split('#')[0];
+      return url;
+    }
+
+    // Marca como activo el enlace que corresponde a la página actual
+    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href) return;
+      const linkPath = normalize(href);
+      // Si es index.html o raíz
+      if (
+        (path === "" || path === "index.html" || path === "./index.html") &&
+        (linkPath === "index.html" || linkPath === "./index.html")
+      ) {
+        link.classList.add('active');
+      }
+      // Si coincide el archivo (proyectos.html, articulos.html, curriculum.html, contacto.html, etc)
+      else if (path === linkPath && linkPath !== "") {
+        link.classList.add('active');
+      }
+      // Si coincide el hash (para secciones internas)
+      else if (hash && href.endsWith(hash)) {
+        link.classList.add('active');
+      }
+      else {
+        link.classList.remove('active');
+      }
+    });
+  })();

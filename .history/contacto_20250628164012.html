@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contacto - Eneas Romero</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="styles.css" rel="stylesheet" />
+</head>
+<body>
+  <canvas id="background-canvas"></canvas>
+  <div class="d-flex flex-column min-vh-100">
+    <!-- NAVBAR -->
+    <div id="navbar-container">Cargando navbar...</div>
+    <main style="padding-top: 90px; flex: 1 0 auto;">
+      <section class="container py-5">
+        <h2 class="mb-4 section-title text-center">Contacto</h2>
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="card shadow elegant-card mb-4">
+              <div class="card-body">
+                <form class="contact-form-glass">
+                  <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Tu nombre" required />
+                  </div>
+                  <div class="mb-3">
+                    <input type="email" class="form-control" placeholder="Tu correo" required />
+                  </div>
+                  <div class="mb-3">
+                    <textarea class="form-control" rows="4" placeholder="Mensaje" required></textarea>
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary contact-btn">Enviar</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="text-center mt-3">
+              <p><strong>Email:</strong> personaleneasromero@email.com</p>
+              <p>
+                <a href="https://www.linkedin.com/in/eneas-romero" target="_blank" rel="noopener" class="me-3">
+                  <i class="fab fa-linkedin fa-lg"></i>
+                </a>
+                <a href="https://github.com/enerombar" target="_blank" rel="noopener">
+                  <i class="fab fa-github fa-lg"></i>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer-glass text-center py-4 mt-5" style="flex-shrink:0;">
+      <div class="container">
+        <span class="text-muted">&copy; 2025 Eneas Romero. Todos los derechos reservados.</span>
+      </div>
+    </footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="scripts.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('navbar.html')
+        .then(res => {
+          if (!res.ok) throw new Error('No se pudo cargar navbar.html: ' + res.status);
+          return res.text();
+        })
+        .then(html => {
+          document.getElementById('navbar-container').innerHTML = html;
+          if (typeof window.initLangMenuAnimation === 'function') window.initLangMenuAnimation();
+          if (typeof setupLanguageListeners === 'function') setupLanguageListeners();
+          if (typeof updateLangFlag === 'function') updateLangFlag();
+          if (typeof applyTranslations === 'function') applyTranslations();
+          if (window.bootstrap && window.bootstrap.Collapse) {
+            document.querySelectorAll('.collapse').forEach(function (el) {
+              new bootstrap.Collapse(el, {toggle: false});
+            });
+          }
+          // --- Fix para menú de idiomas ---
+          // Busca el botón y el menú de idiomas por clase o id
+          var langBtn = document.querySelector('.lang-menu-btn, #lang-menu-btn');
+          var langMenu = document.querySelector('.lang-menu, #lang-menu');
+          if (langBtn && langMenu) {
+            langBtn.addEventListener('click', function(e) {
+              e.stopPropagation();
+              langMenu.classList.toggle('show');
+            });
+            // Cierra el menú si se hace click fuera
+            document.addEventListener('click', function(e) {
+              if (!langMenu.contains(e.target) && !langBtn.contains(e.target)) {
+                langMenu.classList.remove('show');
+              }
+            });
+          }
+          // --- Fin fix menú de idiomas ---
+        })
+        .catch(err => {
+          document.getElementById('navbar-container').innerHTML = '<div style="color:red">Error cargando navbar: ' + err.message + '</div>';
+          console.error(err);
+        });
+    });
+  </script>
+  <script>
+    // Fondo animado de partículas
+    document.addEventListener('DOMContentLoaded', function() {
+      const canvas = document.getElementById('background-canvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        function createParticles() {
+          particles = [];
+          for (let i = 0; i < 60; i++) {
+            particles.push({
+              x: Math.random() * canvas.width,
+              y: Math.random() * canvas.height,
+              r: 1 + Math.random() * 2,
+              dx: (Math.random() - 0.5) * 0.7,
+              dy: (Math.random() - 0.5) * 0.7,
+              alpha: 0.3 + Math.random() * 0.7
+            });
+          }
+        }
+        createParticles();
+
+        function drawParticles() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          for (let p of particles) {
+            ctx.save();
+            ctx.globalAlpha = p.alpha;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI);
+            ctx.fillStyle = '#00eaff';
+            ctx.shadowColor = '#00eaff';
+            ctx.shadowBlur = 8;
+            ctx.fill();
+            ctx.restore();
+
+            // Movimiento
+            p.x += p.dx;
+            p.y += p.dy;
+
+            // Rebote en bordes
+            if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+          }
+          requestAnimationFrame(drawParticles);
+        }
+        drawParticles();
+      }
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="scripts.js"></script>
+  <script>
+    // Carga el navbar desde navbar.html y luego inicializa scripts dependientes
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('navbar.html')
+        .then(res => {
+          if (!res.ok) throw new Error('No se pudo cargar navbar.html: ' + res.status);
+          return res.text();
+        })
+        .then(html => {
+          document.getElementById('navbar-container').innerHTML = html;
+          if (typeof window.initLangMenuAnimation === 'function') window.initLangMenuAnimation();
+          if (typeof setupLanguageListeners === 'function') setupLanguageListeners();
+          if (typeof updateLangFlag === 'function') updateLangFlag();
+          if (typeof applyTranslations === 'function') applyTranslations();
+          if (window.bootstrap && window.bootstrap.Collapse) {
+            document.querySelectorAll('.collapse').forEach(function (el) {
+              new bootstrap.Collapse(el, {toggle: false});
+            });
+          }
+          // --- Fix para menú de idiomas ---
+          // Busca el botón y el menú de idiomas por clase o id
+          var langBtn = document.querySelector('.lang-menu-btn, #lang-menu-btn');
+          var langMenu = document.querySelector('.lang-menu, #lang-menu');
+          if (langBtn && langMenu) {
+            langBtn.addEventListener('click', function(e) {
+              e.stopPropagation();
+              langMenu.classList.toggle('show');
+            });
+            // Cierra el menú si se hace click fuera
+            document.addEventListener('click', function(e) {
+              if (!langMenu.contains(e.target) && !langBtn.contains(e.target)) {
+                langMenu.classList.remove('show');
+              }
+            });
+          }
+          // --- Fin fix menú de idiomas ---
+        })
+        .catch(err => {
+          document.getElementById('navbar-container').innerHTML = '<div style="color:red">Error cargando navbar: ' + err.message + '</div>';
+          console.error(err);
+        });
+    });
+  </script>
+</body>
+</html>

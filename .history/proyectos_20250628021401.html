@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Proyectos - Eneas Romero</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="styles.css" rel="stylesheet" />
+</head>
+<body>
+  <canvas id="background-canvas"></canvas>
+  <div class="d-flex flex-column min-vh-100">
+    <!-- NAVBAR -->
+    <div id="navbar-container">Cargando navbar...</div>
+
+    <main style="padding-top: 90px; flex: 1 0 auto;">
+      <section class="container py-5">
+        <h2 class="mb-4 section-title" data-key="projectsTitle">Proyectos</h2>
+        <!-- Filtros de tecnología y orden -->
+        <div class="row mb-4">
+          <div class="col-md-6 mb-2">
+            <label class="form-label fw-bold mb-2">Filtrar por tecnología:</label>
+            <div class="dropdown" id="techDropdownWrapper" style="margin-bottom:0.2rem; position:relative; z-index:1055;">
+              <div style="display:flex;justify-content:flex-end;align-items:center;position:relative;">
+                <button id="clearTechSelectionBtn" type="button" aria-label="Limpiar selección" style="display:none;position:absolute;top:-32px;right:0;background:transparent;border:none;color:#00eaff;font-size:1.2em;z-index:1100;cursor:pointer;padding:0 4px;line-height:1;">
+                  &times;
+                </button>
+              </div>
+              <div style="position:relative;display:flex;align-items:center;">
+                <button class="form-select text-start bg-dark text-white border-info" type="button" id="techDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false" style="box-shadow:0 2px 8px #00eaff33;flex:1 1 auto;">
+                  Selecciona tecnologías...
+                </button>
+              </div>
+              <ul class="dropdown-menu w-100 px-2 pt-0 bg-dark text-white border-info position-absolute"
+  aria-labelledby="techDropdownBtn"
+  style="display:none; top:100%; left:0; min-width:260px; max-width:none; margin-top:0; max-height:320px; overflow:visible; box-shadow:0 8px 32px 8px rgba(0,0,0,0.45), 0 8px 32px 0 rgba(0,234,255,0.10); border-radius:12px; border:1.5px solid #00eaff33; z-index:1060;">
+  <li class="mb-2 p-0" style="position:sticky;top:0;left:0;right:0;z-index:21;background:#181c22;">
+    <input type="text" class="form-control bg-dark text-white border-info" id="techSearchInput" placeholder="Buscar tecnología..." style="box-shadow:none; color:#fff; background:transparent; border:none; border-bottom:1.5px solid #00eaff; border-radius:0; padding-left:0; padding-right:0;">
+  </li>
+  <li style="padding:0;">
+    <div id="techFilterScroll">
+      <div id="techFilterGroup" class="d-flex flex-column gap-1">
+        <!-- Todas las tecnologías siempre visibles -->
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="Python" id="techPython">
+          <label class="form-check-label" for="techPython">🐍 Python</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="Java" id="techJava">
+          <label class="form-check-label" for="techJava">☕ Java</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="React" id="techReact">
+          <label class="form-check-label" for="techReact">⚛️ React</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="Node.js" id="techNode">
+          <label class="form-check-label" for="techNode">🟩 Node.js</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="MongoDB" id="techMongo">
+          <label class="form-check-label" for="techMongo">🍃 MongoDB</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="Flask" id="techFlask">
+          <label class="form-check-label" for="techFlask">🌶️ Flask</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="PostgreSQL" id="techPostgres">
+          <label class="form-check-label" for="techPostgres">🐘 PostgreSQL</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="Vue.js" id="techVue">
+          <label class="form-check-label" for="techVue">🟢 Vue.js</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="Firebase" id="techFirebase">
+          <label class="form-check-label" for="techFirebase">🔥 Firebase</label>
+        </div>
+        <!-- Agrega más tecnologías aquí si lo deseas -->
+      </div>
+    </div>
+  </li>
+  <li class="mt-2 p-0" style="position:sticky;bottom:0;left:0;right:0;z-index:20;background:#181c22;">
+    <button id="applyTechFilterBtn" class="btn btn-info w-100" type="button" style="border-bottom-left-radius:12px; border-bottom-right-radius:12px;">
+      Aplicar
+    </button>
+  </li>
+</ul>
+  <div id="dropdown-backdrop" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:1050;background:rgba(0,0,0,0.35);"></div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-2">
+            <label for="orderFilter" class="form-label fw-bold">Ordenar por:</label>
+            <select id="orderFilter" class="form-select">
+              <option value="desc">Más reciente primero</option>
+              <option value="asc">Más antiguo primero</option>
+            </select>
+          </div>
+        </div>
+        <div class="row g-5" id="projects-list">
+          <!-- Las tarjetas de proyectos serán generadas por JS -->
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer-glass text-center py-4 mt-5" style="flex-shrink:0;">
+      <div class="container">
+        <span class="text-muted">&copy; 2025 Eneas Romero. Todos los derechos reservados.</span>
+      </div>
+    </footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- (Optional) If you want to use AOS, add this line: -->
+  <!-- <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" /> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script> -->
+  <script>
+    // Fondo animado sencillo con partículas
+    const canvas = document.getElementById('background-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const numParticles = 60;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function createParticles() {
+      particles = [];
+      for (let i = 0; i < numParticles; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: 1 + Math.random() * 2,
+          dx: -0.5 + Math.random(),
+          dy: -0.5 + Math.random(),
+          alpha: 0.2 + Math.random() * 0.5
+        });
+      }
+    }
+    createParticles();
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of particles) {
+        ctx.save();
+        ctx.globalAlpha = p.alpha;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI);
+        ctx.fillStyle = '#00eaff';
+        ctx.shadowColor = '#00eaff';
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.restore();
+
+        // Movimiento
+        p.x += p.dx;
+        p.y += p.dy;
+
+        // Rebote en bordes
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      }
+      requestAnimationFrame(drawParticles);
+    }
+    drawParticles();
+  </script>
+  <script>
+    // Carga el navbar desde navbar.html y luego inicializa scripts dependientes
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('navbar.html')
+        .then(res => {
+          if (!res.ok) throw new Error('No se pudo cargar navbar.html: ' + res.status);
+          return res.text();
+        })
+        .then(html => {
+          document.getElementById('navbar-container').innerHTML = html;
+          // scripts.js inicializa listeners y traducción automáticamente
+        })
+        .catch(err => {
+          document.getElementById('navbar-container').innerHTML = '<div style="color:red">Error cargando navbar: ' + err.message + '</div>';
+          console.error(err);
+        });
+    });
+  </script>
+  <script src="scripts.js"></script>
+  <script>
+    // --- Filtro y orden de proyectos ---
+    // Datos de proyectos (puedes agregar más)
+    const projectsData = [
+      {
+        title: "Proyecto 1",
+        description: "Descripción extendida del proyecto 1. Aquí puedes detallar los objetivos, retos, tecnologías empleadas, aprendizajes y resultados obtenidos.",
+        image: "img/proyecto1.jpg",
+        fallback: "img/banner_default.png",
+        technologies: ["React", "Node.js", "MongoDB"],
+        year: 2024,
+        status: "En desarrollo",
+        progress: 60,
+        progressColor: "bg-info",
+        demo: "#"
+      },
+      {
+        title: "Proyecto 2",
+        description: "Descripción extendida del proyecto 2. Explica el propósito, el proceso de desarrollo y cualquier funcionalidad especial.",
+        image: "img/proyecto2.jpg",
+        fallback: "img/banner_default.png",
+        technologies: ["Python", "Flask", "PostgreSQL"],
+        year: 2023,
+        status: "80% completado",
+        progress: 80,
+        progressColor: "bg-warning",
+        demo: "#"
+      },
+      {
+        title: "Proyecto 3",
+        description: "Descripción extendida del proyecto 3. Puedes incluir enlaces a repositorios, capturas de pantalla, y resultados destacados.",
+        image: "img/proyecto3.jpg",
+        fallback: "img/banner_default.png",
+        technologies: ["Vue.js", "Firebase"],
+        year: 2022,
+        status: "Completado",
+        progress: 100,
+        progressColor: "bg-success",
+        demo: "#"
+      }
+      // Agrega más proyectos aquí si lo deseas
+    ];
+
+    function renderProjects() {
+      // Obtener tecnologías seleccionadas (array)
+      const checked = Array.from(document.querySelectorAll('#techFilterGroup input[type=checkbox]:checked')).map(cb => cb.value);
+      const order = document.getElementById('orderFilter').value;
+      let filtered = projectsData.slice();
+
+      // Filtrar por tecnologías (si hay alguna seleccionada)
+      if (checked.length > 0) {
+        filtered = filtered.filter(p =>
+          checked.every(selTech => p.technologies.includes(selTech))
+        );
+      }
+
+      // Ordenar por año
+      filtered.sort((a, b) => {
+        if (order === "desc") return b.year - a.year;
+        else return a.year - b.year;
+      });
+
+      // Renderizar tarjetas
+      const container = document.getElementById('projects-list');
+      container.innerHTML = "";
+      if (filtered.length === 0) {
+        container.innerHTML = '<div class="alert alert-warning text-center">No hay proyectos para este filtro.</div>';
+        return;
+      }
+      filtered.forEach(p => {
+        const techList = p.technologies.map(t => `<span class="badge bg-secondary me-1">${t}</span>`).join(' ');
+        container.innerHTML += `
+          <div class="col-md-12">
+            <div class="card mb-4 shadow elegant-card">
+              <div class="row g-0">
+                <div class="col-md-5">
+                  <img src="${p.image}" onerror="this.onerror=null;this.src='${p.fallback}';" class="img-fluid rounded-start" alt="${p.title}">
+                </div>
+                <div class="col-md-7">
+                  <div class="card-body">
+                    <h3 class="card-title">${p.title}</h3>
+                    <p class="card-text">${p.description}</p>
+                    <div class="mb-2">${techList}</div>
+                    <ul>
+                      <li><strong>Año:</strong> ${p.year}</li>
+                      <li><strong>Estado:</strong> ${p.status}</li>
+                    </ul>
+                    ${p.progress !== undefined ? `
+                    <div class="progress mb-3 project-progress">
+                      <div class="progress-bar progress-bar-striped progress-bar-animated ${p.progressColor}" role="progressbar" style="width: ${p.progress}%;" aria-valuenow="${p.progress}" aria-valuemin="0" aria-valuemax="100">${p.progress}%</div>
+                    </div>
+                    ` : ''}
+                    <a href="${p.demo}" class="btn btn-outline-primary" target="_blank">Ver demo</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    // Actualiza el texto del botón según selección
+    function updateTechDropdownBtnText() {
+      const checked = Array.from(document.querySelectorAll('#techFilterGroup input[type=checkbox]:checked'));
+      const btn = document.getElementById('techDropdownBtn');
+      const clearBtn = document.getElementById('clearTechSelectionBtn');
+
+      btn.classList.remove('hide-arrow');
+
+      if (checked.length === 0) {
+        btn.textContent = 'Selecciona tecnologías...';
+        clearBtn.style.display = 'none';
+        btn.classList.remove('hide-arrow');
+      } else if (checked.length === 1) {
+        btn.textContent = checked[0].nextElementSibling.textContent.trim();
+        clearBtn.style.display = '';
+        btn.classList.add('hide-arrow');
+      } else {
+        btn.textContent = checked.map(cb => cb.nextElementSibling.textContent.trim()).join(', ');
+        clearBtn.style.display = '';
+        btn.classList.add('hide-arrow');
+      }
+    }
+
+    // Filtro de búsqueda en el dropdown (muestra solo las que coinciden, si no hay búsqueda muestra solo las visibles)
+    function filterTechCheckboxes() {
+      const search = document.getElementById('techSearchInput').value.toLowerCase();
+      // Mostrar/ocultar cada tecnología según búsqueda
+      document.querySelectorAll('#techFilterGroup .form-check').forEach(div => {
+        const label = div.querySelector('label').textContent.toLowerCase();
+        div.style.display = label.includes(search) ? "" : "none";
+      });
+      // Oculta el "etc" si hay búsqueda
+      document.getElementById('techEtc').style.display = search ? "none" : "";
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Filtros
+      document.getElementById('orderFilter').addEventListener('change', renderProjects);
+
+      // Checkbox listeners dentro del dropdown
+      document.querySelectorAll('#techFilterGroup input[type=checkbox]').forEach(cb => {
+        cb.addEventListener('click', function(e) {
+          e.stopPropagation();
+        });
+        cb.addEventListener('mousedown', function(e) {
+          e.stopPropagation();
+        });
+      });
+
+      // Filtro de búsqueda
+      document.getElementById('techSearchInput').addEventListener('input', filterTechCheckboxes);
+
+      // Botón aplicar para filtros de tecnología
+      document.getElementById('applyTechFilterBtn').addEventListener('click', function() {
+        updateTechDropdownBtnText();
+        renderProjects();
+        // Opcional: cerrar el dropdown al aplicar
+        const bsDropdown = bootstrap.Dropdown.getOrCreateInstance(document.getElementById('techDropdownBtn'));
+        bsDropdown.hide();
+        // Ajustar altura tras aplicar (por si cambia el contenido)
+        if (typeof adjustTechFilterScrollHeight === 'function') adjustTechFilterScrollHeight();
+      });
+
+      // Botón para limpiar selección de tecnologías
+      document.getElementById('clearTechSelectionBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation(); // <-- Evita que se abra el dropdown
+        document.querySelectorAll('#techFilterGroup input[type=checkbox]').forEach(cb => cb.checked = false);
+        updateTechDropdownBtnText();
+        renderProjects();
+        // Cerrar el dropdown al limpiar selección
+        const techDropdownMenu = document.querySelector('#techDropdownWrapper .dropdown-menu');
+        const dropdownBackdrop = document.getElementById('dropdown-backdrop');
+        techDropdownMenu.style.display = 'none';
+        dropdownBackdrop.style.display = 'none';
+        document.getElementById('techDropdownBtn').setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('overflow-hidden');
+        // Ajustar altura tras limpiar selección
+        if (typeof adjustTechFilterScrollHeight === 'function') adjustTechFilterScrollHeight();
+      });
+
+      // Evitar que el botón de la x abra el dropdown al hacer mousedown
+      document.getElementById('clearTechSelectionBtn').addEventListener('mousedown', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      });
+
+      // Cerrar dropdown al hacer click fuera (opcional)
+      document.addEventListener('click', function(e) {
+        const dropdown = document.getElementById('techDropdownWrapper');
+        if (!dropdown.contains(e.target)) {
+          const bsDropdown = bootstrap.Dropdown.getOrCreateInstance(document.getElementById('techDropdownBtn'));
+          bsDropdown.hide();
+          // Ajustar altura tras cerrar por click fuera
+          if (typeof adjustTechFilterScrollHeight === 'function') adjustTechFilterScrollHeight();
+        }
+      });
+
+      // Actualizar texto al abrir el dropdown
+      document.getElementById('techDropdownBtn').addEventListener('click', updateTechDropdownBtnText);
+
+      // Animación para el dropdown de tecnologías
+      const techDropdownBtn = document.getElementById('techDropdownBtn');
+      const techDropdownMenu = document.querySelector('#techDropdownWrapper .dropdown-menu');
+      const dropdownBackdrop = document.getElementById('dropdown-backdrop');
+      const techDropdownWrapper = document.getElementById('techDropdownWrapper');
+      const techFilterScroll = document.getElementById('techFilterScroll');
+
+      // Mostrar/ocultar el dropdown manualmente para que sea position-absolute y no desplace nada
+      techDropdownBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        // --- NUEVO: calcular espacio arriba y abajo ---
+        const btnRect = techDropdownBtn.getBoundingClientRect();
+        const menuHeight = techDropdownMenu.scrollHeight;
+        const viewportHeight = window.innerHeight;
+        const footer = document.querySelector('footer');
+        let footerTop = viewportHeight;
+        if (footer) {
+          const footerRect = footer.getBoundingClientRect();
+          footerTop = footerRect.top;
+        }
+        // Espacio disponible abajo y arriba del botón
+        const spaceBelow = Math.max(0, footerTop - btnRect.bottom);
+        const spaceAbove = Math.max(0, btnRect.top);
+
+        // Altura ocupada por search y botones sticky (aprox)
+        const stickyHeight = (() => {
+          const topSticky = techDropdownMenu.querySelector('li.mb-2[style*="position:sticky"]');
+          const bottomSticky = techDropdownMenu.querySelector('li.mt-2[style*="position:sticky"]');
+          let h = 0;
+          if (topSticky) h += topSticky.offsetHeight;
+          if (bottomSticky) h += bottomSticky.offsetHeight;
+          return h || 110; // fallback
+        })();
+
+        // Decide si mostrar arriba o abajo
+        let showAbove = false;
+        let maxMenuHeight = 320; // default
+        if (spaceBelow < menuHeight && spaceAbove > spaceBelow) {
+          // Mostrar arriba (dropup)
+          showAbove = true;
+          // Ajustar altura máxima para no tapar navbar ni salir de pantalla
+          maxMenuHeight = Math.max(120, Math.min(menuHeight, spaceAbove - 16));
+          techDropdownWrapper.classList.add('dropup');
+          techDropdownMenu.style.top = 'auto';
+          techDropdownMenu.style.bottom = '100%';
+        } else {
+          // Mostrar abajo (dropdown)
+          showAbove = false;
+          // Ajustar altura máxima para no tapar footer ni salir de pantalla
+          maxMenuHeight = Math.max(120, Math.min(menuHeight, spaceBelow - 16));
+          techDropdownWrapper.classList.remove('dropup');
+          techDropdownMenu.style.top = '100%';
+          techDropdownMenu.style.bottom = 'auto';
+        }
+        // Limitar la altura del scroll interno del menú para que no sobresalga de la pantalla
+        techDropdownMenu.style.maxHeight = maxMenuHeight + 'px';
+        techFilterScroll.style.maxHeight = Math.max(40, maxMenuHeight - stickyHeight - 8) + 'px';
+
+        const isShown = techDropdownMenu.style.display === 'block';
+        if (!isShown) {
+          techDropdownMenu.style.display = 'block';
+          dropdownBackdrop.style.display = 'block';
+          techDropdownBtn.setAttribute('aria-expanded', 'true');
+          // Bloquear scroll de fondo
+          document.body.classList.add('overflow-hidden');
+        } else {
+          techDropdownMenu.style.display = 'none';
+          dropdownBackdrop.style.display = 'none';
+          techDropdownBtn.setAttribute('aria-expanded', 'false');
+          document.body.classList.remove('overflow-hidden');
+        }
+        updateTechDropdownBtnText();
+      });
+      // Cerrar al hacer click fuera
+      dropdownBackdrop.addEventListener('click', function() {
+        techDropdownMenu.style.display = 'none';
+        dropdownBackdrop.style.display = 'none';
+        techDropdownBtn.setAttribute('aria-expanded', 'false');
+        // Restaurar scroll de fondo
+        document.body.classList.remove('overflow-hidden');
+      });
+      // Cerrar al aplicar
+      document.getElementById('applyTechFilterBtn').addEventListener('click', function() {
+        updateTechDropdownBtnText();
+        renderProjects();
+        techDropdownMenu.style.display = 'none';
+        dropdownBackdrop.style.display = 'none';
+        techDropdownBtn.setAttribute('aria-expanded', 'false');
+        // Restaurar scroll de fondo
+        document.body.classList.remove('overflow-hidden');
+      });
+      // Prevenir cierre por defecto de Bootstrap
+      techDropdownMenu.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+
+      renderProjects();
+      updateTechDropdownBtnText();
+    });
+
+    // Cerrar el dropdown con ESC si está abierto
+    document.addEventListener('keydown', function(e) {
+      if (e.key === "Escape") {
+        const techDropdownMenu = document.querySelector('#techDropdownWrapper .dropdown-menu');
+        const dropdownBackdrop = document.getElementById('dropdown-backdrop');
+        const techDropdownBtn = document.getElementById('techDropdownBtn');
+        if (techDropdownMenu && techDropdownMenu.style.display === 'block') {
+          techDropdownMenu.style.display = 'none';
+          dropdownBackdrop.style.display = 'none';
+          techDropdownBtn.setAttribute('aria-expanded', 'false');
+          document.body.classList.remove('overflow-hidden');
+        }
+      }
+    });
+  </script>
+  <script>
+    // Ajusta dinámicamente el alto del container de tecnologías según la posición del botón "Aplicar"
+    function adjustTechFilterScrollHeight() {
+      const techDropdownMenu = document.querySelector('#techDropdownWrapper .dropdown-menu');
+      const techFilterScroll = document.getElementById('techFilterScroll');
+      const applyBtn = document.getElementById('applyTechFilterBtn');
+      if (!techDropdownMenu || !techFilterScroll || !applyBtn) return;
+
+      // Forzar layout para obtener posiciones correctas tras cambios de DOM
+      techDropdownMenu.style.display = 'block';
+      // Espera a que el DOM se actualice (por ejemplo, tras búsqueda)
+      setTimeout(() => {
+        const menuRect = techDropdownMenu.getBoundingClientRect();
+        const btnRect = applyBtn.getBoundingClientRect();
+        const topSticky = techDropdownMenu.querySelector('li.mb-2[style*="position:sticky"]');
+        const topStickyRect = topSticky ? topSticky.getBoundingClientRect() : { bottom: menuRect.top };
+        const scrollTop = topStickyRect.bottom;
+        const scrollBottom = btnRect.top;
+        // El -8 es para un pequeño margen visual
+        let availableHeight = Math.max(0, scrollBottom - scrollTop - 8);
+
+        // Siempre reservar espacio para al menos 3 tecnologías (~120px)
+        const minTechHeight = 120;
+        if (availableHeight < minTechHeight) availableHeight = minTechHeight;
+
+        techFilterScroll.style.maxHeight = availableHeight + 'px';
+        techFilterScroll.style.minHeight = minTechHeight + 'px';
+      }, 0);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Habilita/deshabilita el botón "Aplicar" según selección
+      function updateApplyTechFilterBtnState() {
+        const checked = document.querySelectorAll('#techFilterGroup input[type=checkbox]:checked');
+        const applyBtn = document.getElementById('applyTechFilterBtn');
+        if (applyBtn) {
+          applyBtn.disabled = checked.length === 0;
+        }
+      }
+
+      // Llama a la función al abrir el dropdown y al hacer resize
+      const techDropdownBtn = document.getElementById('techDropdownBtn');
+      techDropdownBtn.addEventListener('click', function() {
+        // Limpiar el buscador cada vez que se abre el dropdown
+        techSearchInput.value = '';
+        // Disparar el filtro para mostrar todas las tecnologías
+        techSearchInput.dispatchEvent(new Event('input'));
+        adjustTechFilterScrollHeight();
+        updateApplyTechFilterBtnState();
+      });
+      window.addEventListener('resize', adjustTechFilterScrollHeight);
+
+      // Si el menú cambia de tamaño por cualquier motivo (por ejemplo, búsqueda), vuelve a ajustar
+      document.getElementById('techSearchInput').addEventListener('input', function() {
+        adjustTechFilterScrollHeight();
+      });
+
+      // Actualiza el estado del botón "Aplicar" al (des)marcar tecnologías
+      document.querySelectorAll('#techFilterGroup input[type=checkbox]').forEach(cb => {
+        cb.addEventListener('change', function() {
+          adjustTechFilterScrollHeight();
+          updateApplyTechFilterBtnState();
+        });
+      });
+
+      // También al limpiar selección
+      document.getElementById('clearTechSelectionBtn').addEventListener('click', function() {
+        updateApplyTechFilterBtnState();
+      });
+
+      // Inicializa el estado del botón al cargar
+      updateApplyTechFilterBtnState();
+    });
+  </script>
+  <style>
+    /* Adaptar dropdown de tecnologías al tema oscuro */
+    #techDropdownWrapper {
+      margin-bottom: 0.2rem;
+      position: relative;
+      z-index: 1055;
+    }
+    #techDropdownWrapper .dropdown-menu {
+      background: #181c22 !important;
+      color: #e0f7fa !important;
+      border-radius: 12px;
+      border: 1.5px solid #00eaff33;
+      box-shadow: 0 8px 32px 8px rgba(0,0,0,0.45), 0 8px 32px 0 rgba(0,234,255,0.10) !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      position: absolute !important;
+      left: 0 !important;
+      right: 0 !important;
+      top: 100% !important;
+      margin-top: 0 !important; /* <-- Asegura que no haya separación */
+      z-index: 1060;
+      display: none;
+      /* Elimina cualquier desplazamiento vertical extra */
+      transform: none !important;
+      overflow: visible !important; /* Cambiado de auto a visible */
+      min-height: 200px !important; /* Asegura altura suficiente para 3 tecnologías + buscador + botón */
+    }
+    #techDropdownWrapper .dropdown-menu li.mb-2[style*="position:sticky"] {
+      background: #181c22 !important;
+      box-shadow: 0 2px 8px #00eaff22;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      z-index: 21;
+    }
+    #techDropdownWrapper .dropdown-menu li.mt-2[style*="position:sticky"] {
+      background:  #232930 !important; /* Igual que el menú, no transparente */
+      box-shadow: 0 -2px 8px #00eaff22;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      z-index: 20;
+      border-bottom-left-radius: 12px !important;
+      border-bottom-right-radius: 12px !important;
+    }
+    #techDropdownWrapper .dropdown-menu .btn {
+      border-radius: 12px !important;
+      border: none !important;
+      background: linear-gradient(90deg, #00eaff 0%, #00bcd4 100%) !important;
+      color: #181c22 !important;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      font-size: 1rem;
+      box-shadow: 0 1px 6px 0 #00eaff22;
+      transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+      padding-top: 0.45em;
+      padding-bottom: 0.45em;
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+      text-shadow: 0 1px 6px #fff2;
+      outline: none !important;
+      width: 90%;
+      margin: 0 auto 0.3em auto;
+      display: block;
+      /* Elimina cualquier regla que fuerce border-top-left-radius o border-top-right-radius a 0 */
+      background-clip: padding-box !important; /* Asegura que el gradiente no se salga del borde redondeado */
+    }
+    #techDropdownWrapper .dropdown-menu .btn:hover,
+    #techDropdownWrapper .dropdown-menu .btn:focus {
+      background: linear-gradient(90deg, #00bcd4 0%, #00eaff 100%) !important;
+      color: #181c22 !important;
+      box-shadow: 0 2px 10px 0 #00eaff44;
+      text-shadow: 0 2px 8px #fff4;
+    }
+    #techDropdownWrapper .dropdown-menu .form-check-label {
+      color: #e0f7fa !important;
+    }
+    #techDropdownWrapper .dropdown-menu .form-check-input:checked {
+      background-color: #00eaff !important;
+      border-color: #00eaff !important;
+    }
+    #techDropdownWrapper .dropdown-menu .form-check-input {
+      background-color: #222 !important;
+      border-color: #00bcd4 !important;
+    }
+    #techDropdownWrapper .dropdown-menu .form-control,
+    #techDropdownWrapper .dropdown-menu .form-control::placeholder {
+      background: #181c22 !important;
+      color: #fff !important;
+      border: 1.5px solid #00eaff33 !important;
+      opacity: 1;
+    }
+    #techDropdownWrapper .dropdown-menu .form-control:focus {
+      border-color: #00eaff !important;
+      box-shadow: 0 0 0 2px #00eaff44;
+      background: #222 !important;
+      color: #fff !important;
+    }
+    #techDropdownWrapper .dropdown-menu .form-control#techSearchInput {
+      background: transparent !important;
+      border: none !important;
+      border-bottom: 1.5px solid #00eaff !important;
+      border-top: none !important;
+      border-left: none !important;
+      border-right: none !important;
+      box-shadow: none !important;
+      outline: none !important;
+      padding-left: 0.1em;
+      padding-right: 0.1em;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      margin: 0 !important;
+      height: 2.1em !important; /* ajusta si quieres más compacto */
+      min-height: 0 !important;
+      line-height: 1.3 !important;
+      appearance: none !important;
+      -webkit-appearance: none !important;
+    }
+    #techDropdownWrapper .dropdown-menu .form-control#techSearchInput:focus,
+    #techDropdownWrapper .dropdown-menu .form-control#techSearchInput:focus-visible,
+    #techDropdownWrapper .dropdown-menu .form-control#techSearchInput:active {
+      background: transparent !important;
+      border: none !important;
+      border-bottom: 1.5px solid #00eaff !important;
+      border-top: none !important;
+      border-left: none !important;
+      border-right: none !important;
+      box-shadow: none !important;
+      outline: none !important;
+      padding-left: 0.1em;
+      padding-right: 0.1em;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      margin: 0 !important;
+      height: 2.1em !important;
+      min-height: 0 !important;
+      line-height: 1.3 !important;
+      appearance: none !important;
+      -webkit-appearance: none !important;
+    }
+    /* Elimina autofill amarillo/azul en Chrome */
+    #techDropdownWrapper .dropdown-menu .form-control#techSearchInput:-webkit-autofill,
+    #techDropdownWrapper .dropdown-menu .form-control#techSearchInput:-webkit-autofill:focus,
+    #techDropdownWrapper .dropdown-menu .form-control#techSearchInput:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 1000px #181c22 inset !important;
+      box-shadow: 0 0 0 1000px #181c22 inset !important;
+      -webkit-text-fill-color: #fff !important;
+      border: none !important;
+      border-bottom: 1.5px solid #00eaff !important;
+      border-top: none !important;
+      border-left: none !important;
+      border-right: none !important;
+      appearance: none !important;
+      -webkit-appearance: none !important;
+    }
+    #techDropdownWrapper .dropdown-menu .form-check:hover .form-check-label {
+      color: #00eaff !important;
+    }
+    #techDropdownWrapper .dropdown-menu .form-check-input:checked + .form-check-label {
+      color: #00eaff !important;
+    }
+    #techDropdownWrapper .dropdown-menu .form-check-input[type="checkbox"] {
+      accent-color: #00eaff;
+    }
+    #techDropdownWrapper .dropdown-menu .form-check-input[type="checkbox"]:hover {
+      border-color: #00eaff;
+    }
+    #techDropdownWrapper .dropdown-menu .form-check {
+      border-radius: 6px;
+      padding: 2px 6px;
+      transition: background 0.15s;
+      display: flex;
+      align-items: center;
+      min-height: 36px;
+      /* Asegura espacio para el check y el texto */
+      padding-left: 32px; /* <-- Más a la derecha */
+    }
+    #techDropdownWrapper .dropdown-menu .form-check-label {
+      color: #e0f7fa !important;
+      font-weight: 500;
+      font-size: 1.08rem;
+      margin-left: 0.7em;
+      white-space: normal;
+      flex: 1 1 auto;
+      /* Permite que el texto se ajuste y no tape el check */
+      padding-right: 0.5em;
+      /* Espacio a la derecha para evitar corte */
+    }
+    #techDropdownWrapper .dropdown-menu .form-check-input {
+      margin-top: 0.2em;
+      flex-shrink: 0;
+      /* Mantiene el check alineado y visible */
+    }
+    #techDropdownWrapper .dropdown-menu .form-check:hover {
+      background: #00eaff11;
+    }
+    #techDropdownWrapper .dropdown-menu .form-check-input:focus-visible {
+      outline: 2px solid #00eaff;
+      outline-offset: 1px;
+    }
+    #techDropdownWrapper .dropdown-menu #techEtc {
+      color: #00eaff99 !important;
+    }
+    /* Animación para el dropdown */
+    .dropdown-menu.animated-dropdown {
+      transition: opacity 0.25s cubic-bezier(.4,0,.2,1), transform 0.25s cubic-bezier(.4,0,.2,1);
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .dropdown-menu.animated-dropdown.dropdown-fadeout {
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+    }
+    .dropdown-menu.animated-dropdown.dropdown-fadein {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .dropdown.dropup .dropdown-menu.animated-dropdown {
+      /* Para dropup, animar hacia arriba */
+      transform: translateY(0);
+    }
+    .dropdown.dropup .dropdown-menu.animated-dropdown.dropdown-fadeout {
+      transform: translateY(-20px);
+    }
+    .dropdown.dropup .dropdown-menu.animated-dropdown.dropdown-fadein {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #clearTechSelectionBtn {
+      transition: color 0.15s;
+      position: absolute;
+      top: px; /* Arriba del dropdown */
+      right: 0px; /* Más pegado al desplegable */
+      z-index: 1100;
+      pointer-events: auto;
+    }
+    #clearTechSelectionBtn:hover {
+      color: #ff1744;
+    }
+    #techFilterScroll {
+      max-height: 120px !important; /* Ajusta para asegurar 3 tecnologías completas */
+      min-height: 120px !important; /* <-- Mantiene el espacio aunque haya menos de 3 */
+      overflow-y: auto !important;
+      /* Opcional: para que el scroll sea suave y bonito */
+      scrollbar-width: thin;
+      scrollbar-color: #00eaff #181c22;
+    }
+    #techFilterScroll::-webkit-scrollbar {
+      width: 8px;
+      background: #181c22;
+    }
+    #techFilterScroll::-webkit-scrollbar-thumb {
+      background: #00eaff88;
+      border-radius: 6px;
+    }
+    #techDropdownWrapper .form-select {
+  /* Si quieres mantener el padding derecho, puedes ajustarlo aquí */
+  padding-right: 2.5em !important;
+}
+#techDropdownBtn.hide-arrow {
+  background-image: none !important;
+}
+/* NUEVO: la x debe estar por encima y ser clicable, el botón no debe recibir eventos cuando la x está debajo del cursor */
+#clearTechSelectionBtn {
+  pointer-events: auto;
+  position: absolute;
+  right: -38px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1100;
+}
+#clearTechSelectionBtn[style*="display:"]:not([style*="display:none"]) {
+  /* Cuando la x está visible, el botón no recibe eventos debajo de la x */
+  pointer-events: auto;
+}
+#clearTechSelectionBtn[style*="display:none"] {
+  pointer-events: none;
+}
+/* Opcional: asegura que el botón no reciba eventos debajo de la x */
+#clearTechSelectionBtn[style*="display:"]:not([style*="display:none"]) ~ #techDropdownBtn {
+  pointer-events: none;
+}
+  </style>
+</body>
+</html>
+</html>

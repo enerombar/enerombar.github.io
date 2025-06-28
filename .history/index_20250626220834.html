@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eneas Romero - Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- AOS Animations -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+
+  <!-- FontAwesome Icons -->
+  <script src="https://kit.fontawesome.com/yourkit.js" crossorigin="anonymous"></script>
+
+  <!-- Custom CSS -->
+  <link href="styles.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero text-white d-flex align-items-center justify-content-center text-center" data-aos="fade-down" data-aos-duration="1500" data-aos-easing="ease-in-out">
+    <div>
+      <h1 class="display-2 fw-bold hero-title">Eneas Romero</h1>
+      <p class="lead hero-subtitle">Ingeniería, Matemáticas y Tecnología</p>
+      <a href="#projects" class="btn btn-primary btn-lg mt-3 hero-btn">Ver proyectos</a>
+    </div>
+  </header>
+
+  <!-- SOBRE MÍ -->
+  <section id="about" class="py-5" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="200">
+    <div class="container">
+      <h2 class="mb-4 section-title">Sobre mí</h2>
+      <p class="section-text">
+        Soy Eneas Romero, estudiante de Ingeniería Informática y Matemáticas. Me apasiona el desarrollo de software,
+        la inteligencia artificial y compartir conocimiento a través de artículos técnicos.
+      </p>
+    </div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <section id="projects" class="py-5 bg-dark text-white">
+    <div class="container" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="300">
+      <h2 class="mb-4 section-title">Proyectos</h2>
+      <div class="row g-4">
+
+        <!-- Proyecto 1 con imagen real -->
+        <div class="col-md-4" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="400">
+          <div class="card h-100 shadow project-card">
+            <img
+              src="img/proyecto1.jpg"
+              onerror="this.onerror=null;this.src='img/banner-default.jpg';"
+              class="card-img-top"
+              alt="Proyecto 1"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Proyecto 1</h5>
+              <p class="card-text">Descripción breve del proyecto. Tecnologías usadas, objetivos y resultados.</p>
+              <a href="#" class="btn btn-outline-primary project-btn">Ver más</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Proyecto 2 sin imagen (caerá a banner por defecto) -->
+        <div class="col-md-4" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="600">
+          <div class="card h-100 shadow project-card">
+            <img
+              src="img/proyecto2_inexistente.jpg"
+              onerror="this.onerror=null;this.src='img/banner-default.jpg';"
+              class="card-img-top"
+              alt="Proyecto 2"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Proyecto 2</h5>
+              <p class="card-text">Este proyecto aún no tiene imagen, pero se ve bien con el banner por defecto.</p>
+              <a href="#" class="btn btn-outline-primary project-btn">Ver más</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Proyecto 3 con imagen real -->
+        <div class="col-md-4" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="800">
+          <div class="card h-100 shadow project-card">
+            <img
+              src="img/proyecto3.jpg"
+              onerror="this.onerror=null;this.src='img/banner-default.jpg';"
+              class="card-img-top"
+              alt="Proyecto 3"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Proyecto 3</h5>
+              <p class="card-text">Proyecto con imagen real, listo para mostrar.</p>
+              <a href="#" class="btn btn-outline-primary project-btn">Ver más</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contact" class="py-5 bg-dark text-white" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
+    <div class="container">
+      <h2 class="mb-4 section-title">Contacto</h2>
+      <form>
+        <div class="mb-3">
+          <input type="text" class="form-control" placeholder="Tu nombre" required />
+        </div>
+        <div class="mb-3">
+          <input type="email" class="form-control" placeholder="Tu correo" required />
+        </div>
+        <div class="mb-3">
+          <textarea class="form-control" rows="4" placeholder="Mensaje" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary contact-btn">Enviar</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Bootstrap + AOS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      once: true,  // anima solo la primera vez al hacer scroll
+      mirror: false,
+    });
+  </script>
+
+</body>
+</html>

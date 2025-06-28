@@ -1,0 +1,128 @@
+<!-- Este archivo ya no es necesario porque el menú de idiomas está en navbar.html -->
+<!-- Puedes dejarlo vacío o eliminarlo completamente. -->
+<li class="nav-item dropdown">
+  <button id="langToggle"
+    class="btn btn-link dropdown-toggle d-flex align-items-center"
+    type="button"
+    aria-haspopup="true"
+    aria-expanded="false"
+    style="padding:0 8px; background:none; border:none; box-shadow:none;">
+    <img src="img/flags/es.svg" alt="Idioma actual" style="width:22px;height:22px;border-radius:50%;margin-right:6px;">
+    <span class="d-none d-lg-inline" data-key="navLang">Idioma</span>
+  </button>
+  <ul id="langMenu"
+    class="dropdown-menu shadow-sm"
+    aria-labelledby="langToggle"
+    style="min-width:120px; z-index: 1051; position: absolute;">
+    <li>
+      <button class="dropdown-item lang-option" data-lang="es" tabindex="0">
+        <img src="img/es.svg" alt="Español" style="width:18px;margin-right:6px;"> Español
+      </button>
+    </li>
+    <li>
+      <button class="dropdown-item lang-option" data-lang="en" tabindex="0">
+        <img src="img/agb.svg" alt="English" style="width:18px;margin-right:6px;"> English
+      </button>
+    </li>
+    <!-- Agrega más idiomas aquí si lo deseas -->
+  </ul>
+</li>
+<style>
+  #langMenu {
+    left: auto;
+    right: 0;
+    top: 110%;
+  }
+</style>
+<script>
+(function() {
+  function ready(fn) {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", fn);
+    } else {
+      fn();
+    }
+  }
+
+  ready(function() {
+    window.initLangMenuAnimation = function() {
+      const langToggle = document.getElementById('langToggle');
+      const langMenu = document.getElementById('langMenu');
+      let menuOpen = false;
+      let blurTimeout = null;
+
+      if (langToggle && langMenu && !langMenu.dataset.animated) {
+        langMenu.dataset.animated = "true";
+        function hideMenuWithAnimation() {
+          langMenu.classList.remove('show');
+          menuOpen = false;
+          langToggle.setAttribute('aria-expanded', 'false');
+        }
+        function showMenuWithAnimation() {
+          langMenu.classList.add('show');
+          menuOpen = true;
+          langToggle.setAttribute('aria-expanded', 'true');
+          const firstOption = langMenu.querySelector('.lang-option');
+          if (firstOption) firstOption.focus();
+        }
+        langToggle.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          if (!langMenu.classList.contains('show')) {
+            showMenuWithAnimation();
+          } else {
+            hideMenuWithAnimation();
+          }
+        });
+        const langFlagImg = langToggle.querySelector('img');
+        if (langFlagImg) {
+          langFlagImg.addEventListener('click', function(e) {
+            langToggle.click();
+          });
+        }
+        langMenu.querySelectorAll('.lang-option').forEach(option => {
+          option.setAttribute('tabindex', '0');
+          option.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            hideMenuWithAnimation();
+          });
+          option.addEventListener('keydown', function(e) {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              e.stopPropagation();
+              option.click();
+            }
+          });
+        });
+        document.addEventListener('click', function(e) {
+          if (menuOpen && !langMenu.contains(e.target) && !langToggle.contains(e.target)) {
+            hideMenuWithAnimation();
+          }
+        }, true);
+        document.addEventListener('keydown', function(e) {
+          if (e.key === "Escape" && menuOpen) {
+            hideMenuWithAnimation();
+            langToggle.focus();
+          }
+        });
+        langMenu.addEventListener('focusout', function(e) {
+          blurTimeout = setTimeout(() => {
+            if (
+              menuOpen &&
+              !langMenu.contains(document.activeElement) &&
+              document.activeElement !== langToggle
+            ) {
+              hideMenuWithAnimation();
+            }
+          }, 10);
+        });
+        langMenu.addEventListener('focusin', function() {
+          if (blurTimeout) clearTimeout(blurTimeout);
+        });
+      }
+    };
+    window.initLangMenuAnimation();
+  });
+})();
+</script>

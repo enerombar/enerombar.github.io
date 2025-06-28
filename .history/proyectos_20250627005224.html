@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Proyectos - Eneas Romero</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="styles.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm" style="backdrop-filter: blur(8px); background:rgba(18,18,18,0.85)!important;">
+      <div class="container">
+        <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="index.html">
+          <img src="img/logo.png" alt="Logo" style="height:38px;width:38px;border-radius:50%;background:#fff;padding:3px;box-shadow:0 0 8px #00eaff44;">
+          Eneas Romero
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav align-items-center">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#about" data-key="navAbout">Sobre mí</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="proyectos.html" data-key="navProjectsPage">Proyectos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="articulos.html" data-key="navArticles">Artículos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#contact" data-key="navContact">Contacto</a>
+            </li>
+            <li class="nav-item ms-3">
+              <button id="langToggle" class="btn btn-outline-info btn-sm">EN</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main style="padding-top: 90px; flex: 1 0 auto;">
+      <section class="container py-5">
+        <h2 class="mb-4 section-title" data-key="projectsTitle">Proyectos en profundidad</h2>
+        <div class="row g-5">
+          <div class="col-md-12">
+            <div class="card mb-4 shadow elegant-card">
+              <div class="row g-0">
+                <div class="col-md-5">
+                  <img src="img/proyecto1.jpg" onerror="this.onerror=null;this.src='img/banner_default.png';" class="img-fluid rounded-start" alt="Proyecto 1">
+                </div>
+                <div class="col-md-7">
+                  <div class="card-body">
+                    <h3 class="card-title">Proyecto 1</h3>
+                    <p class="card-text">Descripción extendida del proyecto 1. Aquí puedes detallar los objetivos, retos, tecnologías empleadas, aprendizajes y resultados obtenidos.</p>
+                    <ul>
+                      <li><strong>Tecnologías:</strong> React, Node.js, MongoDB</li>
+                      <li><strong>Estado:</strong> En desarrollo</li>
+                    </ul>
+                    <div class="progress mb-3 project-progress">
+                      <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div>
+                    </div>
+                    <a href="#" class="btn btn-outline-primary">Ver demo</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card mb-4 shadow elegant-card">
+              <div class="row g-0">
+                <div class="col-md-5">
+                  <img src="img/proyecto2.jpg" onerror="this.onerror=null;this.src='img/banner_default.png';" class="img-fluid rounded-start" alt="Proyecto 2">
+                </div>
+                <div class="col-md-7">
+                  <div class="card-body">
+                    <h3 class="card-title">Proyecto 2</h3>
+                    <p class="card-text">Descripción extendida del proyecto 2. Explica el propósito, el proceso de desarrollo y cualquier funcionalidad especial.</p>
+                    <ul>
+                      <li><strong>Tecnologías:</strong> Python, Flask, PostgreSQL</li>
+                      <li><strong>Estado:</strong> 80% completado</li>
+                    </ul>
+                    <div class="progress mb-3 project-progress">
+                      <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
+                    </div>
+                    <a href="#" class="btn btn-outline-primary">Ver demo</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card mb-4 shadow elegant-card">
+              <div class="row g-0">
+                <div class="col-md-5">
+                  <img src="img/proyecto3.jpg" onerror="this.onerror=null;this.src='img/banner_default.png';" class="img-fluid rounded-start" alt="Proyecto 3">
+                </div>
+                <div class="col-md-7">
+                  <div class="card-body">
+                    <h3 class="card-title">Proyecto 3</h3>
+                    <p class="card-text">Descripción extendida del proyecto 3. Puedes incluir enlaces a repositorios, capturas de pantalla, y resultados destacados.</p>
+                    <ul>
+                      <li><strong>Tecnologías:</strong> Vue.js, Firebase</li>
+                      <li><strong>Estado:</strong> Completado</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline-primary">Ver demo</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Agrega más proyectos aquí si lo deseas -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer-glass text-center py-4 mt-5" style="flex-shrink:0;">
+      <div class="container">
+        <span class="text-muted">&copy; 2024 Eneas Romero. Todos los derechos reservados.</span>
+      </div>
+    </footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="scripts.js"></script>
+</body>
+</html>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="scripts.js"></script>
+</body>
+</html>

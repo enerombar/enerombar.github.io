@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eneas Romero - Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- AOS Animations -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+
+  <!-- FontAwesome Icons -->
+  <script src="https://kit.fontawesome.com/2dd1da6546.js" crossorigin="anonymous"></script>
+
+  <!-- Custom CSS -->
+  <link href="styles.css" rel="stylesheet" />
+  <!-- Elimina Particles.js -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> -->
+</head>
+<body>
+  <!-- Pantalla de carga -->
+  <!-- <div id="loading-screen">
+    <div class="spinner"></div>
+  </div> -->
+  <!-- Canvas de ondas senoidales animadas como fondo -->
+  <canvas id="waves-canvas" style="position:fixed;left:0;top:0;width:100vw;height:100vh;min-width:100vw;min-height:100vh;max-width:none;max-height:none;z-index:0;pointer-events:none;"></canvas>
+  <!-- Canvas de curvas concéntricas poligonales suaves y rotatorias como fondo -->
+  <canvas id="hero-polygons-canvas" style="position:fixed;left:0;top:0;width:100vw;height:100vh;min-width:100vw;min-height:100vh;max-width:none;max-height:none;z-index:0;pointer-events:none;"></canvas>
+  <!-- Fondo animado canvas -->
+  <canvas id="background-canvas" style="position:fixed;left:0;top:0;width:100vw;height:100vh;min-width:100vw;min-height:100vh;max-width:none;max-height:none;z-index:0;pointer-events:none;"></canvas>
+  <!-- NAVBAR -->
+  <div id="navbar-container">Cargando navbar...</div>
+
+  <!-- HERO -->
+  <header id="hero" class="hero text-white d-flex align-items-center justify-content-center text-center" data-aos="fade-down"
+    data-aos-duration="1500" data-aos-easing="ease-in-out" style="position:relative;z-index:1;">
+    <div class="w-100 d-flex flex-column align-items-center">
+      <!-- Logo centrado arriba -->
+      <div class="hero-logo-wrapper">
+        <img id="hero-logo" src="img/logo.png" alt="Logo Eneas Romero" style="height:130px;width:130px;max-width:130px;">
+      </div>
+      <!-- Contenedor del contenido del hero -->
+      <div style="position:relative;z-index:1;display:inline-block;">
+        <div class="hero-content-glass">
+          <div class="hero-text-wrapper text-center">
+              <h1 class="display-2 fw-bold hero-title" data-key="heroName">
+                Eneas Romero
+              </h1>
+              <p class="lead hero-subtitle mb-2 text-gradient" data-key="heroSubtitle">
+                Matemáticas & Computación
+              </p>
+              <!-- Iconos sociales justo debajo del subtítulo y dentro del mismo contenedor -->
+              <div class="hero-social-icons">
+                <a href="https://www.linkedin.com/in/eneas-romero" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link">
+                  <i class="fab fa-linkedin fa-2x"></i>
+                </a>
+                <a href="https://github.com/enerombar" target="_blank" rel="noopener" aria-label="GitHub" class="social-link">
+                  <i class="fab fa-github fa-2x"></i>
+                </a>
+                <a href="mailto:personaleneasromero@email.com" aria-label="Correo" class="social-link">
+                  <i class="fas fa-envelope fa-2x"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Indicador scroll animado fuera del recuadro -->
+      <div class="scroll-indicator mt-4" aria-label="Desplazar hacia abajo">
+        <button id="scroll-down-btn" class="scroll-mouse-btn" aria-label="Bajar a la siguiente sección">
+          <span class="scroll-mouse">
+            <span class="scroll-wheel"></span>
+          </span>
+          <span class="scroll-arrow"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- SOBRE MÍ (resumido) -->
+  <section id="about" class="py-5" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="200" style="position:relative;z-index:1;">
+    <div class="container">
+      <h2 class="mb-4 section-title" data-key="aboutTitle">Sobre mí</h2>
+      <p class="section-text" data-key="aboutText">
+        Soy Eneas Romero, estudiante de Ingeniería Informática y Matemáticas. Apasionado por el desarrollo de software, la inteligencia artificial y la divulgación técnica.
+      </p>
+      <a href="articulos.html" class="btn btn-outline-primary mt-3" data-key="btnViewArticles">Ver artículos</a>
+    </div>
+  </section>
+
+  <!-- LÍNEA CRONOLÓGICA ACADÉMICA (resumida) -->
+  <section id="timeline" class="py-5" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200" style="position:relative;z-index:1;">
+    <div class="container">
+      <h2 class="mb-4 section-title">Línea cronológica</h2>
+      <ul class="timeline">
+        <li>
+          <div class="timeline-date">2024</div>
+          <div class="timeline-content">
+            <h5>Grado en Ingeniería Informática y Matemáticas</h5>
+            <p>Doble titulación en progreso.</p>
+          </div>
+        </li>
+        <li>
+          <div class="timeline-date">2022</div>
+          <div class="timeline-content">
+            <h5>Bachillerato Científico-Tecnológico</h5>
+            <p>Matrícula de Honor.</p>
+          </div>
+        </li>
+      </ul>
+      <a href="proyectos.html#timeline" class="btn btn-outline-primary mt-3">Ver más logros</a>
+    </div>
+  </section>
+
+  <!-- PROYECTOS (solo muestra 2, resumen) -->
+  <section id="projects" class="py-5 bg-dark text-white" style="position:relative;z-index:1;"
+    data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="300">
+    <div class="container">
+      <h2 class="mb-4 section-title" data-key="projectsTitle">Proyectos</h2>
+      <div class="row g-4">
+        <div class="col-md-6" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="400">
+          <div class="card h-100 shadow project-card elegant-card">
+            <div class="project-img-wrapper">
+              <img src="img/proyecto1.jpg" onerror="this.onerror=null;this.src='img/banner_default.png';"
+                class="card-img-top" alt="Proyecto 1" />
+              <div class="project-img-overlay"></div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title" data-key="project1Title">Proyecto 1</h5>
+              <p class="card-text" data-key="project1Desc">Descripción breve del proyecto. Tecnologías usadas, objetivos y resultados.</p>
+              <a href="proyectos.html" class="btn btn-outline-primary project-btn" data-key="btnViewMore">Ver más</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="600">
+          <div class="card h-100 shadow project-card elegant-card">
+            <div class="project-img-wrapper">
+              <img src="img/proyecto2.jpg" onerror="this.onerror=null;this.src='img/banner_default.png';"
+                class="card-img-top" alt="Proyecto 2" />
+              <div class="project-img-overlay"></div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title" data-key="project2Title">Proyecto 2</h5>
+              <p class="card-text" data-key="project2Desc">Este proyecto aún no tiene imagen, pero se ve bien con el banner por defecto.</p>
+              <a href="proyectos.html" class="btn btn-outline-primary project-btn" data-key="btnViewMore">Ver más</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <a href="proyectos.html" class="btn btn-primary" data-key="btnViewProjects">Ver todos los proyectos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer-glass text-center py-4 mt-5">
+    <div class="container">
+      <span class="text-muted">&copy; 2025 Eneas Romero. Todos los derechos reservados.</span>
+    </div>
+  </footer>
+
+  <!-- Scripts Bootstrap y AOS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Carga el navbar desde navbar.html y luego inicializa scripts dependientes
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('navbar.html')
+        .then(res => {
+          if (!res.ok) throw new Error('No se pudo cargar navbar.html: ' + res.status);
+          return res.text();
+        })
+        .then(html => {
+          document.getElementById('navbar-container').innerHTML = html;
+          // Inicializa scripts dependientes del navbar aquí
+          // Carga AOS y scripts.js solo después de insertar el navbar
+          var aosScript = document.createElement('script');
+          aosScript.src = "https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js";
+          aosScript.onload = function() {
+            if (window.AOS) AOS.init({ once: true, mirror: false });
+          };
+          document.body.appendChild(aosScript);
+
+          var mainScript = document.createElement('script');
+          mainScript.src = "scripts.js";
+          mainScript.onload = function() {
+            if (window.initAfterNavbar) window.initAfterNavbar();
+          };
+          document.body.appendChild(mainScript);
+        })
+        .catch(err => {
+          document.getElementById('navbar-container').innerHTML = '<div style="color:red">Error cargando navbar: ' + err.message + '</div>';
+          console.error(err);
+        });
+    });
+  </script>
+  <script>
+    // Ondas senoidales animadas en canvas + tubo curvo "raro"
+    (function() {
+      const canvas = document.getElementById('waves-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      // Configuración de ondas: [amplitud, frecuencia, color, grosor, velocidad]
+      const waves = [
+        { amp: 50, freq: 10, color: '#00eaff77', width: 4, speed: 0.18, phase: 0 },
+        { amp: 28, freq: 5, color: '#2575fc55', width: 3, speed: 0.48, phase: Math.PI / 2 },
+        { amp: 13, freq: 7, color: '#00bcd477', width: 2, speed: 0.38, phase: Math.PI }
+      ];
+
+      // Tubo "raro" como una onda más, pero con movimientos no senoidales
+      function drawWeirdTube(time) {
+        const w = canvas.width, h = canvas.height;
+        ctx.save();
+        ctx.globalAlpha = 0.1; // menos opacidad
+        ctx.strokeStyle = "#2196f3";
+        ctx.lineWidth = 32;
+        ctx.shadowColor = "#2196f3";
+        ctx.shadowBlur = 16;
+        ctx.beginPath();
+        // Empieza el tubo fuera de pantalla para que no se vea la punta
+        for (let x = -40; x <= w + 40; x += 2) {
+          const t = time * 0.22;
+          const base = h * 0.5;
+          const y =
+            base
+            + 60 * Math.sin((x / w) * 1.2 * Math.PI * 2 + t)
+            + 22 * Math.cos((x / w) * 3.7 * Math.PI * 2 - t * 1.3)
+            + 12 * Math.sin((x / w) * 7.1 * Math.PI * 2 + t * 2.1)
+            + 8 * Math.cos((x / w) * 11.3 * Math.PI * 2 - t * 0.7 + Math.sin(t));
+          if (x === -40) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function drawWaves(time) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawWeirdTube(time);
+        const midY = canvas.height / 2;
+        const opacities = [0.55, 0.33, 0.22]; // Opacidad diferente para cada onda
+        for (let i = 0; i < waves.length; i++) {
+          const wave = waves[i];
+          ctx.save();
+          ctx.strokeStyle = wave.color;
+          ctx.globalAlpha = opacities[i] !== undefined ? opacities[i] : 0.25;
+          ctx.lineWidth = wave.width;
+          ctx.beginPath();
+          for (let x = 0; x <= canvas.width; x += 2) {
+            const t = time * wave.speed;
+            const y = midY + wave.amp * Math.sin((x / canvas.width) * wave.freq * Math.PI * 2 + t + wave.phase);
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          ctx.stroke();
+          ctx.restore();
+        }
+      }
+
+      function animate() {
+        drawWaves(performance.now() / 1000);
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+  </script>
+  <script>
+    // Canvas de curvas poligonales suaves y concéntricas rotatorias como fondo animado
+    (function() {
+      const canvas = document.getElementById('hero-polygons-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      // Interpolación circular para evitar saltos bruscos en la animación de fase
+      function lerpAngle(a, b, t) {
+        let diff = b - a;
+        while (diff < -Math.PI) diff += Math.PI * 2;
+        while (diff > Math.PI) diff -= Math.PI * 2;
+        return a + diff * t;
+      }
+
+      // Genera un polígono suave e irregular con interpolación de ángulos
+      function drawPolygon(cx, cy, r, sides, phase, irregularity = 0.18, smoothness = 0.45) {
+        // Si sides no es entero, interpola entre dos polígonos para evitar parpadeos
+        const intSides = Math.floor(sides);
+        const frac = sides - intSides;
+        const phase2 = phase + Math.PI / (intSides + 1);
+
+        function getPoints(n, ph) {
+          const pts = [];
+          for (let i = 0; i < n; i++) {
+            const baseAngle = (i / n) * Math.PI * 2;
+            const angle = baseAngle + ph;
+            // Irregularidad base
+            let ir = r * (1 + Math.sin(baseAngle * n * 0.7 + ph * 1.2) * irregularity);
+            // Añade "saltos" suaves en algunos vértices
+            if (i % 3 === 0) {
+              ir += r * 0.13 * Math.sin(baseAngle * 2.1 + Math.cos(ph) * 0.7);
+            }
+            if (i % 4 === 1) {
+              ir -= r * 0.09 * Math.cos(baseAngle * 3.2 + ph * 0.8);
+            }
+            // Añade un pico más pronunciado en un vértice aleatorio
+            if (i === Math.floor(n / 2)) {
+              ir += r * 0.18 * Math.abs(Math.sin(ph * 0.7));
+            }
+            // Añade una pequeña "meseta" en algunos vértices
+            if (i % 5 === 2) {
+              ir += r * 0.07 * Math.sign(Math.sin(baseAngle * 1.5 + ph * 0.5));
+            }
+            pts.push([
+              cx + ir * Math.cos(angle),
+              cy + ir * Math.sin(angle)
+            ]);
+          }
+          return pts;
+        }
+
+        // Interpolación de puntos entre los dos polígonos
+        const ptsA = getPoints(intSides, phase);
+        const ptsB = getPoints(intSides + 1, phase2);
+        const points = [];
+        for (let i = 0; i < ptsA.length; i++) {
+          const a = ptsA[i];
+          const b = ptsB[i % ptsB.length];
+          points.push([
+            a[0] * (1 - frac) + b[0] * frac,
+            a[1] * (1 - frac) + b[1] * frac
+          ]);
+        }
+
+        // Dibuja orbes suaves en cada vértice para un detalle visual extra
+        for (let i = 0; i < points.length; i++) {
+          const [x, y] = points[i];
+          ctx.save();
+          // Reduce aún más el radio de los orbes para que sean más pequeños y discretos
+          ctx.globalAlpha = 0.13 + 0.09 * Math.abs(Math.sin(i + phase));
+          ctx.beginPath();
+          ctx.arc(x, y, 2 + 1 * Math.abs(Math.sin(i + phase)), 0, 2 * Math.PI);
+          ctx.fillStyle = i % 2 === 0 ? "#00eaff" : "#2196f3";
+          ctx.shadowColor = ctx.fillStyle;
+          ctx.shadowBlur = 6;
+          ctx.fill();
+          ctx.restore();
+        }
+
+        ctx.beginPath();
+        for (let i = 0; i < points.length; i++) {
+          const [x1, y1] = points[i];
+          const [x2, y2] = points[(i + 1) % points.length];
+          // Suavidad de la curva, pero con un poco de "salto" en algunos segmentos
+          let localSmooth = smoothness;
+          if (i % 3 === 0) localSmooth += 0.13;
+          if (i % 4 === 2) localSmooth -= 0.09;
+          const mx = x1 + (x2 - x1) * localSmooth;
+          const my = y1 + (y2 - y1) * localSmooth;
+          if (i === 0) ctx.moveTo(x1, y1);
+          ctx.quadraticCurveTo(mx, my, x2, y2);
+        }
+        ctx.closePath();
+      }
+
+      // Suaviza la transición de número de lados para evitar saltos
+      function getSmoothSides(t, base, alt, speed) {
+        // Oscila suavemente entre base y alt usando seno
+        return base + (alt - base) * (0.5 + 0.5 * Math.sin(t * speed));
+      }
+
+      function animate() {
+        resize();
+        const width = canvas.width, height = canvas.height;
+        ctx.clearRect(0, 0, width, height);
+        const cx = width / 2, cy = height / 2;
+        const t = performance.now() * 0.0005;
+        const num = 4;
+        for (let i = 0; i < num; i++) {
+          const r = Math.min(width, height) * (0.13 + i * 0.035);
+          const sides = getSmoothSides(t + i, 6, 7, 1.2 + i * 0.2);
+          ctx.save();
+          ctx.globalAlpha = 0.10 + 0.06 * (num - i);
+          ctx.strokeStyle = i % 2 === 0 ? "#00eaff" : "#2196f3";
+          ctx.lineWidth = 2.2 + (num - i) * 0.5;
+          drawPolygon(cx, cy, r, sides, t * (0.7 + i * 0.18) + i * 0.8, 0.18 + i * 0.07, 0.48 - i * 0.07);
+          ctx.shadowColor = ctx.strokeStyle;
+          ctx.shadowBlur = 8 - i * 2;
+          ctx.stroke();
+          ctx.restore();
+        }
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+  </script>
+  <script>
+    // Fondo animado con partículas matemáticas a la izquierda y de informática/IA a la derecha (solo símbolos, sin emojis, más pequeños)
+    (function() {
+      const canvas = document.getElementById('background-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      // Símbolos matemáticos (solo texto, sin emojis)
+      const mathSymbols = [
+        '∑', 'π', '∞', '∫', '√', 'Δ', 'λ', 'μ', 'θ', 'α', 'β', 'γ', 'Ω', '∂', '≠', '≈', '≤', '≥', '∈', '∉', '∅', 'ℝ', 'ℤ', 'ℕ', '∃', '∀', '→', '←', '⇔', '⊂', '⊆', '⊇', '⊃', '∪', '∩', '∧', '∨', '⊥', '∥', '∝', '∴', '∵', '∗', '⋅', '∓', '±', '∇'
+      ];
+      // Símbolos de informática/IA (solo texto, sin emojis)
+      const aiSymbols = [
+        '{ }', '<>', 'AI', 'λ', '0/1', '∑', 'ƒ(x)', 'CPU', 'GPU', 'if', 'else', 'for', 'while', 'true', 'false', '&&', '||', '!', '==', '!=', '>=', '<=', '=>', '𝒪(n)', '𝒪(1)', '𝒪(n²)', '∫', 'Σ', '𝑁𝑁', '𝑓', '𝑥', '𝑦', '𝑧', '∂', '∇', '∈', '∉', '∪', '∩', '⊕', '⊗', '⊥', '∧', '∨', '¬', '∃', '∀', '∴', '∵', '∝', '∑', '∏'
+      ];
+
+      let particles = [];
+      const numMathParticles = 6;
+      const numAIParticles = 6;
+      const numDots = 40;
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      function randomFrom(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+
+      function createParticles() {
+        particles = [];
+        const w = canvas.width;
+        const h = canvas.height;
+        // Matemáticas a la izquierda
+        for (let i = 0; i < numMathParticles; i++) {
+          particles.push({
+            type: 'math',
+            x: Math.random() * (w * 0.38),
+            y: Math.random() * (h * 0.7) + h * 0.12,
+            dx: -0.18 + Math.random() * 0.36,
+            dy: -0.18 + Math.random() * 0.36,
+            alpha: 0.04 + Math.random() * 0.09, // menos opacidad
+            symbol: randomFrom(mathSymbols),
+            fontSize: 16 + Math.random() * 14,
+            rotate: Math.random() * Math.PI * 2,
+            rotateSpeed: -0.01 + Math.random() * 0.02
+          });
+        }
+        // Informática/IA a la derecha
+        for (let i = 0; i < numAIParticles; i++) {
+          particles.push({
+            type: 'ai',
+            x: w * 0.62 + Math.random() * (w * 0.38),
+            y: Math.random() * (h * 0.7) + h * 0.12,
+            dx: -0.18 + Math.random() * 0.36,
+            dy: -0.18 + Math.random() * 0.36,
+            alpha: 0.04 + Math.random() * 0.09, // menos opacidad
+            symbol: randomFrom(aiSymbols),
+            fontSize: 16 + Math.random() * 14,
+            rotate: Math.random() * Math.PI * 2,
+            rotateSpeed: -0.01 + Math.random() * 0.02
+          });
+        }
+        // Dots por toda la pantalla
+        for (let i = 0; i < numDots; i++) {
+          particles.push({
+            type: 'dot',
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: 1.2 + Math.random() * 2.2,
+            dx: -0.4 + Math.random() * 0.8,
+            dy: -0.4 + Math.random() * 0.8,
+            alpha: 0.01 + Math.random() * 0.03 // aún menos opacidad
+          });
+        }
+      }
+      createParticles();
+
+      function drawParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const now = performance.now() * 0.001;
+        for (let pIdx = 0; pIdx < particles.length; pIdx++) {
+          const p = particles[pIdx];
+          if (p.type === 'dot') {
+            ctx.save();
+            // Opacidad animada para cada punto (dot)
+            const alpha = 0.08 + 0.22 * (0.5 + 0.5 * Math.sin(now * 1.1 + pIdx * 1.7));
+            ctx.globalAlpha = alpha;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI);
+            ctx.fillStyle = '#00eaff';
+            ctx.shadowColor = '#00eaff';
+            ctx.shadowBlur = 8;
+            ctx.fill();
+            ctx.restore();
+          } else {
+            ctx.save();
+            // Opacidad animada para símbolos matemáticos/informáticos
+            const alpha = p.alpha * (0.5 + 0.5 * Math.sin(now * 1.2 + pIdx * 0.9));
+            ctx.globalAlpha = alpha;
+            ctx.font = `bold ${p.fontSize}px 'Space Grotesk', 'Arial', sans-serif`;
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotate);
+            ctx.fillStyle = (p.type === 'math') ? '#00eaff' : '#00ffb3';
+            ctx.shadowColor = (p.type === 'math') ? '#00eaff' : '#00ffb3';
+            ctx.shadowBlur = 8;
+            ctx.fillText(p.symbol, 0, 0);
+            ctx.restore();
+            p.rotate += p.rotateSpeed;
+          }
+          // Movimiento bordes y mantener en su zona
+          p.x += p.dx;
+          p.y += p.dy;
+          if (p.type === 'math') {
+            if (p.x < 0) { p.x = 0; p.dx *= -1; }
+            if (p.x > canvas.width * 0.38) { p.x = canvas.width * 0.38; p.dx *= -1; }
+          } else if (p.type === 'ai') {
+            if (p.x < canvas.width * 0.62) { p.x = canvas.width * 0.62; p.dx *= -1; }
+            if (p.x > canvas.width) { p.x = canvas.width; p.dx *= -1; }
+          } else {
+            if (p.x < 0) { p.x = 0; p.dx *= -1; }
+            if (p.x > canvas.width) { p.x = canvas.width; p.dx *= -1; }
+          }
+          if (p.y < 0) { p.y = 0; p.dy *= -1; }
+          if (p.y > canvas.height) { p.y = canvas.height; p.dy *= -1; }
+        }
+        requestAnimationFrame(drawParticles);
+      }
+      drawParticles();
+      // Re-crear partículas al redimensionar
+      window.addEventListener('resize', createParticles);
+    })();
+  </script>
+</body>
+</html>

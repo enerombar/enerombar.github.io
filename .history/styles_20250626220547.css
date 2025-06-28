@@ -1,0 +1,198 @@
+/* styles.css */
+
+/* Base */
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background: linear-gradient(135deg, #0a74da, #121212);
+  color: #f0f0f0;
+  margin: 0;
+}
+
+/* HERO */
+.hero {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 1rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.1), transparent 70%);
+  pointer-events: none;
+  animation: pulse 10s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.15; }
+  50% { transform: scale(1.05); opacity: 0.25; }
+}
+.hero h1 {
+  font-size: clamp(3rem, 10vw, 5rem);
+  font-weight: 800;
+  text-shadow: 0 0 10px rgba(255,255,255,0.5);
+  margin-bottom: 0.5rem;
+}
+.hero p.lead {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 8px rgba(0,0,0,0.7);
+}
+.btn-primary {
+  background: #00bcd4;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 50px;
+  box-shadow: 0 6px 15px rgba(0,188,212,0.5);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background: #00acc1;
+  box-shadow: 0 8px 20px rgba(0,172,193,0.7);
+  outline: none;
+}
+
+/* SECTIONS */
+section {
+  padding: 4rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+h2 {
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+}
+h2::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: #00bcd4;
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+/* SOBRE MI */
+#about p {
+  font-size: 1.15rem;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+  text-align: center;
+  color: #e0e0e0;
+}
+
+/* PROYECTOS */
+#projects {
+  background: #121212;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0,188,212,0.2);
+}
+.card {
+  background: #1a1a1a;
+  border-radius: 15px;
+  border: none;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(0,188,212,0.6);
+}
+.card-img-top {
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.card:hover .card-img-top {
+  transform: scale(1.07);
+}
+.card-body {
+  padding: 1.25rem;
+  color: #d0d0d0;
+}
+.card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #00bcd4;
+  margin-bottom: 0.75rem;
+}
+.card-text {
+  font-size: 1rem;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+.btn-outline-primary {
+  border-color: #00bcd4;
+  color: #00bcd4;
+  font-weight: 600;
+  border-radius: 30px;
+  padding: 0.5rem 1.5rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.btn-outline-primary:hover {
+  background-color: #00bcd4;
+  color: #121212;
+}
+
+/* CONTACTO */
+#contact {
+  background: #121212;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0,188,212,0.2);
+}
+form input,
+form textarea {
+  background: #1a1a1a;
+  border: 2px solid #00bcd4;
+  color: #eee;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  transition: border-color 0.3s ease;
+  font-size: 1rem;
+}
+form input:focus,
+form textarea:focus {
+  border-color: #00e5ff;
+  outline: none;
+  box-shadow: 0 0 10px #00e5ff;
+  background: #222;
+}
+form button {
+  background: #00bcd4;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  box-shadow: 0 6px 15px rgba(0,188,212,0.5);
+  transition: background 0.3s ease;
+}
+form button:hover,
+form button:focus {
+  background: #00acc1;
+  box-shadow: 0 8px 20px rgba(0,172,193,0.7);
+  outline: none;
+}
+
+/* Responsive tweaks */
+@media (max-width: 767px) {
+  .hero h1 {
+    font-size: 3rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+}
